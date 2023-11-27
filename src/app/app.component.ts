@@ -5,20 +5,22 @@ import { LoginComponent } from "./Components/Login/Login.component";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { WetherForcastComponent } from "./Components/WetherForcast/WetherForcast.component";
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    LoginComponent,
-    RouterLink,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonToggleModule,
-  ],
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        LoginComponent,
+        RouterLink,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonToggleModule,
+        WetherForcastComponent
+    ]
 })
 export class AppComponent {
   UpdateNumber() {
