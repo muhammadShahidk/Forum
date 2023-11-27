@@ -5,7 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../../Services/Auth.service';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -16,8 +17,8 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
 export class RegisterComponent {
   private fb = inject(FormBuilder);
@@ -29,11 +30,21 @@ export class RegisterComponent {
     email: [null, Validators.required],
   });
 
-  constructor(private _router:Router) { }
+  constructor(private _router: Router, private _authService: AuthService) {}
 
   onSubmit(): void {
-    alert('Thanks!');
-    this._router.navigate(['/login']);
-    console.log(this.addressForm.value)
+    if (this.addressForm.valid) {
+      const form = this.addressForm.value;
+      const { username, password, firstName, email, lastName } = form;
+      
+      console.log(form);
+      this._authService.Register({
+        userName: username ?? "",
+        password: password ?? "",
+        firstName: firstName ?? "",
+        email: email ?? "",
+        lastName: lastName ?? "",
+      });
+    }
   }
 }

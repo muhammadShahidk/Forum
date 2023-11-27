@@ -1,5 +1,4 @@
-<div class="m-auto w-12/12 sm:w-9/12 min-md:w-8">
-
+<div class="m-auto w-12/12 sm:w-8/12 lg:w-3/12 min-w-[600px]">
   <form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
     <mat-card class="shipping-card">
       <mat-card-header>
@@ -37,7 +36,7 @@
 
         <!-- username -->
         <mat-form-field class="full-width">
-          <input matInput placeholder="Username" formControlName="username" />
+          <input matInput placeholder="Username" autocomplete="username" formControlName="username" />
           @if (addressForm.controls['username'].hasError('required')) {
           <mat-error>Username is <strong>required</strong></mat-error>
           }
@@ -49,6 +48,7 @@
             matInput
             type="email"
             placeholder="Email"
+            autocomplete="email"
             formControlName="email"
           />
           @if (addressForm.controls['email'].hasError('required')) {
@@ -60,6 +60,7 @@
         <mat-form-field class="full-width">
           <input
             matInput
+            autocomplete="current-password"
             placeholder="Password"
             formControlName="password"
             type="password"
@@ -68,11 +69,12 @@
           <mat-error>Password is <strong>required</strong></mat-error>
           }
         </mat-form-field>
-
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit">Register</button>
+        <button mat-raised-button color="primary" type="submit">
+          Register
+        </button>
       </mat-card-actions>
     </mat-card>
   </form>
