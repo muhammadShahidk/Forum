@@ -20,7 +20,7 @@ import { UserLoginDto } from '../../Modals/Dtos/UserLoginDto';
   selector: 'app-login',
   standalone: true,
   template: `
-    <div class="m-auto w-12/12 sm:w-9/12 min-md:w-8">
+    <div class="m-auto w-12/12 sm:w-8/12 lg:w-3/12 min-w-[400px]">
       <mat-card class="">
         <mat-card-header class="d-flex justify-between mb-3">
           <mat-card-title>Login</mat-card-title>
