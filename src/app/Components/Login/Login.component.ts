@@ -20,58 +20,81 @@ import { UserLoginDto } from '../../Modals/Dtos/UserLoginDto';
   selector: 'app-login',
   standalone: true,
   template: `
-    <div class="m-auto w-12/12 sm:w-8/12 lg:w-3/12 min-w-[400px]">
-      <mat-card class="">
-        <mat-card-header class="d-flex justify-between mb-3">
-          <mat-card-title>Login</mat-card-title>
-          <!-- <button mat-raised-button type="submit">Register</button> -->
-          <a mat-raised-button routerLink="/register">register</a>
-        </mat-card-header>
+    <!-- login page container -->
+    <div class="m-auto sm:p-5 md:w-4/6  bg-gray-100  ">
+      <!-- header title -->
+      <h1 class="text-4xl text-blue-700 font-extrabold mb-4">
+        We’ve missed you!
+      </h1>
+      <p class="text-sm text-green-900">
+        More than 150 questions are waiting for your wise suggestions!
+      </p>
 
-        <mat-card-content>
-          <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
-            <!-- username -->
-            <mat-form-field class="w-[100%]">
-              <input
-                matInput
-                placeholder="Username"
-                autocomplete="username"
-                formControlName="username"
-              />
-              @if (loginForm.controls['username'].hasError('required')) {
-              <mat-error>Username is <strong>required</strong></mat-error>
-              }
-            </mat-form-field>
+      <!-- login Form Container  -->
+      <div class="flex flex-col sm:flex-row p-2 md:h-[500px]">
+        <mat-card class="min-w-[400px]">
+          <!-- login header -->
+          <mat-card-header class="d-flex justify-between mb-3">
+            <mat-card-title>Login</mat-card-title>
+            <a mat-raised-button routerLink="/register">register</a>
+          </mat-card-header>
 
-            <!-- password -->
-            <mat-form-field class="w-[100%]">
-              <input
-                matInput
-                placeholder="Password"
-                formControlName="password"
-                autocomplete="current-password"
-                type="password"
-              />
-              @if (loginForm.controls['password'].hasError('required')) {
-              <mat-error>Password is <strong>required</strong></mat-error>
-              }
-            </mat-form-field>
-          </form>
-        </mat-card-content>
+          <!-- login Content -->
+          <mat-card-content>
+            <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+              <mat-form-field class="w-[100%]">
+                <input
+                  matInput
+                  placeholder="Username"
+                  autocomplete="username"
+                  formControlName="username"
+                />
+                <!-- handle user Required Error -->
+                @if (loginForm.controls['username'].hasError('required')) {
+                <mat-error>Username is <strong>required</strong></mat-error>
+                }
+              </mat-form-field>
 
-        <mat-card-actions>
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="onSubmit()"
-            type="submit"
-          >
-            login
-          </button>
-        </mat-card-actions>
-      </mat-card>
+              <!-- password -->
+              <mat-form-field class="w-[100%]">
+                <input
+                  matInput
+                  placeholder="Password"
+                  formControlName="password"
+                  autocomplete="current-password"
+                  type="password"
+                />
 
-      <!-- show the erro message if we have in good looking way -->
+                <!-- handle password Required Error -->
+                @if (loginForm.controls['password'].hasError('required')) {
+                <mat-error>Password is <strong>required</strong></mat-error>
+                }
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+
+          <!-- Actions -->
+          <mat-card-actions>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="onSubmit()"
+              type="submit"
+              class="w-full"
+            >
+              login
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+        <!-- login Image -->
+        <div
+          class="image-container w-11/12 bg-cover bg-center"
+          style="background-image: url('../../assets/images/LoginImag.png')"
+        ></div>
+      </div>
+
+      <!-- Api Response Error -->
       <div class="text-red-500 text-center mt-3">
         @if (ErrorMessage()) {
         <mat-error>{{ ErrorMessage() }}</mat-error>
@@ -91,6 +114,7 @@ import { UserLoginDto } from '../../Modals/Dtos/UserLoginDto';
     RouterLink,
   ],
 })
+
 export class LoginComponent {
   private fb = inject(FormBuilder);
   loginForm = this.fb.group({
@@ -103,7 +127,6 @@ export class LoginComponent {
 
   ErrorMessage = signal(''); //) ;
 
-  // login method using auth service
   constructor(private router: Router, private authService: AuthService) {}
 
   async login() {
@@ -117,7 +140,7 @@ export class LoginComponent {
       // Do something with the user object
       console.log('login response');
       console.log(user);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/forum']);
     } catch (error) {
       // Handle the error
       this.ErrorMessage.set(error as any);
