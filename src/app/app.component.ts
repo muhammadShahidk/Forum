@@ -6,6 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { WetherForcastComponent } from "./Components/WetherForcast/WetherForcast.component";
+import { MainComponent } from './pages/main/main.component';
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -19,7 +20,8 @@ import { WetherForcastComponent } from "./Components/WetherForcast/WetherForcast
         MatToolbarModule,
         MatIconModule,
         MatButtonToggleModule,
-        WetherForcastComponent
+        WetherForcastComponent,
+        MainComponent
     ]
 })
 export class AppComponent {
