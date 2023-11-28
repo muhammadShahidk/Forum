@@ -10,7 +10,7 @@
       <a mat-list-item href="#">Link 3</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content >
     <mat-toolbar color="primary">
       @if (isHandset$ | async) {
         <button
@@ -23,6 +23,12 @@
       }
       <span>Forum</span>
     </mat-toolbar>
-    <!-- Add Content Here -->
+    <main class="mt-8">
+      <!-- Add Content Here -->
+      @for (item of [1,2,3,4,5]; track $index) {
+        <app-post></app-post>
+      }
+    </main>
+    <app-post></app-post>
   </mat-sidenav-content>
 </mat-sidenav-container>

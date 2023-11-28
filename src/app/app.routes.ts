@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './Components/Login/Login.component';
-import { RegisterComponent } from './Components/register/register.component';
+import { LoginComponent } from './pages/LoginPage/Login.component';
+import { RegisterComponent } from './pages/registerPage/register.component';
 import { AppComponent } from './app.component';
-import { MainComponent } from './pages/main/main.component';
+import { MainComponent } from './pages/mainPage/main.component';
+import { HomePageComponent } from './pages/HomePage/HomePage.component';
 
 export const routes: Routes = [
   {
@@ -21,5 +22,5 @@ export const routes: Routes = [
     path: 'forum',
     component: MainComponent,
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/forum', pathMatch: 'full' },
 ];

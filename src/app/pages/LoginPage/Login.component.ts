@@ -6,13 +6,14 @@ import {
   signal,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { RegisterComponent } from '../register/register.component';
+import { RegisterComponent } from '../registerPage/register.component';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/Auth.service';
 import { UserLoginDto } from '../../Modals/Dtos/UserLoginDto';
+import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/LoginRegisterNav.component';
 
 // import
 
@@ -20,8 +21,10 @@ import { UserLoginDto } from '../../Modals/Dtos/UserLoginDto';
   selector: 'app-login',
   standalone: true,
   template: `
+  <!-- nav -->
+  <app-login-register-nav/>
     <!-- login page container -->
-    <div class="m-auto sm:p-5 md:w-4/6  bg-gray-100  ">
+    <div class="m-auto mt-5 sm:p-5 md:w-4/6  bg-gray-100  ">
       <!-- header title -->
       <h1 class="text-4xl text-blue-700 font-extrabold mb-4">
         We’ve missed you!
@@ -112,6 +115,7 @@ import { UserLoginDto } from '../../Modals/Dtos/UserLoginDto';
     ReactiveFormsModule,
     MatInputModule,
     RouterLink,
+    LoginRegisterNavComponent
   ],
 })
 

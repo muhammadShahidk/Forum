@@ -1,12 +1,13 @@
 import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet,RouterLink } from '@angular/router';
-import { LoginComponent } from "./Components/Login/Login.component";
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { LoginComponent } from "./pages/LoginPage/Login.component";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { WetherForcastComponent } from "./Components/WetherForcast/WetherForcast.component";
-import { MainComponent } from './pages/main/main.component';
+import { MainComponent } from './pages/mainPage/main.component';
+import { HomePageComponent } from './pages/HomePage/HomePage.component';
+import { LoginRegisterNavComponent } from './Components/LoginRegisterNav/LoginRegisterNav.component';
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -14,14 +15,14 @@ import { MainComponent } from './pages/main/main.component';
     styleUrl: './app.component.css',
     imports: [
         CommonModule,
-        RouterOutlet,
         LoginComponent,
         RouterLink,
         MatToolbarModule,
         MatIconModule,
-        MatButtonToggleModule,
         WetherForcastComponent,
-        MainComponent
+        MainComponent,
+        RouterOutlet,
+        LoginRegisterNavComponent,
     ]
 })
 export class AppComponent {

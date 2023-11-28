@@ -1,19 +1,6 @@
 <main>
-  <mat-toolbar class="flex items-center gap-2">
-    <button mat-icon-button class="flex items-center">
-      <mat-icon>menu</mat-icon>
-    </button>
 
-    <span>Disscussion Forum</span>
-  </mat-toolbar>
 
-  <p class="mt-2 p-2 bg-gray-400">
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-      <mat-button-toggle value="bold"> <a routerLink="/login">login</a></mat-button-toggle>
-      <mat-button-toggle value="italic">  <a routerLink="/register">register</a></mat-button-toggle>
-    </mat-button-toggle-group>
-  </p>
-
-  <app-wether-forcast></app-wether-forcast>
   <router-outlet></router-outlet>
+
 </main>

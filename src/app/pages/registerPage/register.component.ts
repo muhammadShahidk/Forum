@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/Auth.service';
 import { from } from 'rxjs';
+import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/LoginRegisterNav.component';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ import { from } from 'rxjs';
     MatButtonModule,
     MatCardModule,
     ReactiveFormsModule,
+    LoginRegisterNavComponent
   ],
 })
 export class RegisterComponent {
