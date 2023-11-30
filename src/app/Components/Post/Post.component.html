@@ -1,17 +1,5 @@
 <mat-card class=" m-auto mb-2">
-  <div class="p-5">
-    <!-- user Profile with name-->
-    <div class="flex items-center gap-3 p-2justify-center">
-      <div
-        class="text-4xl w-[50px] h-[50px] flex justify-center items-center rounded-full b bg-gray-400"
-      >
-        {{ user.charAt(0) }}
-      </div>
-      <div class="text-lg">{{ user.toUpperCase() }}</div>
-    </div>
-    <!-- Post title -->
-    <div class="text-2xl ml-3 mt-3">{{ title }}</div>
-  </div>
+ <app-post-header user={{user}} title={{title}}></app-post-header>
   
   <mat-card-content p-5>
     <p>
@@ -22,7 +10,7 @@
 
   <mat-card-actions>
     <div class="flex items-center justify-between w-11/12">
-      <button mat-stroked-button>View Details</button>
+      <button (click)="ViewDetails()" mat-stroked-button>View Details</button>
 
       <div class="flex items-center gap-3">
         <!-- Icon views-->

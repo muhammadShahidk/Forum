@@ -29,19 +29,10 @@
       <span>Forum</span>
     </mat-toolbar>
     <main class="w-11/12 sm:w-8/12 m-auto">
-      <!-- create button for new post with mat icon -->
-      <button   mat-stroked-button class="my-3" color="primary" aria-label="Button with icon">
-        <mat-icon>add</mat-icon>
-        Create New Post
-      </button>
      
 
-     
-
-      <!-- Add Content Here -->
-      @for (item of [1,2,3,4,5]; track $index) {
-      <app-post></app-post>
-      }
+     <router-outlet></router-outlet>
+    
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

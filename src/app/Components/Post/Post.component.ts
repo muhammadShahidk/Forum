@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {MatChipsModule} from '@angular/material/chips';
 import { PostTailwindcssComponent } from '../PostTailwindcss/PostTailwindcss.component';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { PostHeaderComponent } from '../PostComponents/PostHeader/PostHeader.component';
 @Component({
   selector: 'app-post',
   standalone: true,
@@ -14,12 +16,22 @@ import { PostTailwindcssComponent } from '../PostTailwindcss/PostTailwindcss.com
     MatCardModule,
     MatIconModule,
     MatChipsModule,
-    PostTailwindcssComponent
+    PostHeaderComponent,
   ],
   templateUrl: './Post.component.html',
   styleUrl: './Post.component.css',
 })
+
 export class PostComponent {
+  constructor (private router: Router,private route:ActivatedRoute){}
+
+// ...
+
+ViewDetails() {
+  const postId = Math.floor(Math.random() * 10) + 1;
+  console.log("activated route" + this.route)
+  this.router.navigate(['PostDetails', postId],{ relativeTo: this.route.parent });
+}
   title:string = "What do you think about manshera"
   user:string ="shahid"
 
