@@ -4,12 +4,7 @@
     <mat-icon>add</mat-icon>
     Create New Post
   </button>
- 
-@for (item of [1,2,3,4,5]; track $index) {
-    <app-post></app-post>
-    }
 
-    <button (click)="getData()">get data</button>
 
 @for (item of posts$ |async; track $index) {
     <app-post [post]="item"></app-post>

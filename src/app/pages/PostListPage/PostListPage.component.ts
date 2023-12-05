@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PostComponent } from '../../Components/Post/Post.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,16 +17,21 @@ import { PostService } from '../../Services/PostService';
     PostComponent,
     MatIconModule,
     MatButtonModule,
-   
+
   ],
   templateUrl: './PostListPage.component.html',
   styleUrl: './PostListPage.component.css',
 })
-export class PostListPageComponent {
+export class PostListPageComponent implements OnInit {
   posts$?:Promise<PostResponseDto[]> ;
 
   getData() {
     this.posts$ = this.postService.getPosts();
   }
     constructor (private postService:PostService){}
+  ngOnInit(): void {
+    this.posts$ = this.postService.getPosts();
+    console.log("this.posts$")
+    console.log(this.posts$)
+  }
  }

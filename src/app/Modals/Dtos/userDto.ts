@@ -1,11 +1,11 @@
 export interface UserRequestDto {
-  FirstName: string;
-  LastName: string;
-  Username: string;
-  Rools: string[];
-  Email: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  rools: string[];
+  username: string;
 }
 
 export interface UserResponseDto extends UserRequestDto {
-  UserID: number;
+  userID: number;
 }

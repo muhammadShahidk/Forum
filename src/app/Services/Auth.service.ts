@@ -71,7 +71,7 @@ export class AuthService {
       debugger
       if(ErrorResult){
         throw new Error(`${ErrorResult}`);
-        
+
       }
       else{
         console.log("trace 1");
@@ -84,11 +84,15 @@ export class AuthService {
 
   //get user details
   async getUserDetails(): Promise<UserResponseDto> {
-    var response  = await this.handleRequest<UserResponseDto>(
-      this.htpp.get(`${RouteCategories.User.GET()}`)
-    );
-    
-    return response;
+    try {
+      const response = await this.handleRequest<UserResponseDto>(
+        this.htpp.get<UserResponseDto>(`${RouteCategories.User.GET()}`)
+      );
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`${(error as any).error}`);
+    }
   }
 
 

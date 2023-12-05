@@ -36,6 +36,32 @@
       <span class="block ml-5">Forum</span>
     </mat-toolbar>
     <main class="w-11/12 sm:w-8/12 m-auto">
+      <mat-list role="list">
+        <mat-list-item role="listitem">{{ user().firstName }}</mat-list-item>
+        <mat-list-item role="listitem">{{ user().lastName }}</mat-list-item>
+        <mat-list-item role="listitem">{{ user().email }}</mat-list-item>
+      </mat-list>
+
+      <!-- user rools -->
+      <mat-chip-listbox aria-label="Dog selection">
+        @for (item of user().rools; track $index) {
+        <mat-chip>
+          <img
+            matChipAvatar
+            src="https://material.angular.io/assets/img/examples/shiba1.jpg"
+            alt="Photo of a Shiba Inu"
+          />
+          {{ item }}
+        </mat-chip>
+        }
+      </mat-chip-listbox>
+
+      <!-- see posts -->
+      <button mat-raised-button color="primary" routerLink="posts">
+        See posts
+      </button>
+
+
       <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>

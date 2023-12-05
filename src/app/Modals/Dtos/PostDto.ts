@@ -1,10 +1,11 @@
 export interface PostResponseDto extends PostRequestDto {
-   PostID: number;
-   UserID: string;
- }
- 
+  postID: number;
+  UserID: string;
+  dateCreated: Date;
+}
+
 export interface PostRequestDto {
-   Title?: string | null;
-   Content?: string | null;
+   title?: string | null;
+   content?: string | null;
  }
- 
+

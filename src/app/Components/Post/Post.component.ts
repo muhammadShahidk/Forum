@@ -7,7 +7,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { PostTailwindcssComponent } from '../PostTailwindcss/PostTailwindcss.component';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { PostHeaderComponent } from '../PostComponents/PostHeader/PostHeader.component';
-import { PostRequestDto } from '../../Modals/Dtos/PostDto';
+import { PostRequestDto, PostResponseDto } from '../../Modals/Dtos/PostDto';
 @Component({
   selector: 'app-post',
   standalone: true,
@@ -28,7 +28,7 @@ export class PostComponent {
 
 // ...
 @Input()
-post?:PostRequestDto 
+post?:PostResponseDto
 
 
 ViewDetails() {
