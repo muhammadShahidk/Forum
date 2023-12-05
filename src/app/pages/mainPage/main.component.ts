@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { PostComponent } from '../../Components/Post/Post.component';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -28,6 +28,11 @@ import { RouterOutlet } from '@angular/router';
   ]
 })
 export class MainComponent {
+  constructor(private router: Router) { }
+logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+}
   private breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

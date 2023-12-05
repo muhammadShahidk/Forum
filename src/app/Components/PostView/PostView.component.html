@@ -59,8 +59,10 @@
 </div>
 <!-- list of comments -->
 
-@for (item of [1,2,3,4]; track $index) {
+<!-- @for (item of [1,2,3,4]; track $index) {
     <app-post></app-post>
-}
+} -->
+<button (click)="getData()">get data</button>
 
+{{posts$ | async | json}}
 

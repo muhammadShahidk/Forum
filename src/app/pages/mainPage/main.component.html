@@ -16,6 +16,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
+      <!-- header -->
       @if (isHandset$ | async) {
       <button
         type="button"
@@ -26,13 +27,16 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       }
-      <span>Forum</span>
+      <!-- create logout button -->
+      <button class mat-button class="ml-auto" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+
+      <span class="block ml-5">Forum</span>
     </mat-toolbar>
     <main class="w-11/12 sm:w-8/12 m-auto">
-     
-
-     <router-outlet></router-outlet>
-    
+      <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>

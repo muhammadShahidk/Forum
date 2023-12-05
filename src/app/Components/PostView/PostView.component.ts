@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { PostComponent } from '../Post/Post.component';
+import { PostService } from '../../Services/PostService';
+import { PostResponseDto } from '../../Modals/Dtos/PostDto';
 
 @Component({
   selector: 'app-post-view',
@@ -27,12 +29,17 @@ import { PostComponent } from '../Post/Post.component';
   styleUrl: './PostView.component.css',
 })
 export class PostViewComponent {
+getData() {
+  this.posts$ = this.postService.getPosts();
+}
+  constructor (private postService:PostService){}
+  
   value = "";
   Data$?:string; 
-
+  posts$?:Promise<PostResponseDto[]> ;
   // set id(heroId: string) {
     //   this.Data$ = this.service.getHero(heroId);
-    // }
+    // 
 @Input()
 set id(postId: string) {
   console.log

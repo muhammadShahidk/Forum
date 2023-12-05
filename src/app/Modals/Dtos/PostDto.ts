@@ -1,7 +1,10 @@
-// creat post interface
- export interface PostDto {
-    title: string;
-    content: string;
-    userId: number;
-    categoryId: number;
-    }
+export interface PostResponseDto extends PostRequestDto {
+   PostID: number;
+   UserID: string;
+ }
+ 
+export interface PostRequestDto {
+   Title?: string | null;
+   Content?: string | null;
+ }
+ 

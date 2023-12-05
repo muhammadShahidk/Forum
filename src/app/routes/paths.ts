@@ -8,52 +8,93 @@ export const PATH_AUTH = {
 };
 
 
-// routes.ts
 
-// routes.ts
+const appendBasePath = (route: string) => {
+  return `${_basePath}/${route}`;
+};
 
 export const RouteCategories = {
   User: {
+    GET: () => appendBasePath('User'),
     Posts: {
-      GET: '/api/User/posts',
-      POST: '/api/User/posts',
-      PUT: (id: string) => `/api/User/posts/${id}`,
-      DELETE: (id: string) => `/api/Posts/${id}`,
+      GET: () => appendBasePath('User/posts'),
+      POST: () => appendBasePath('User/posts'),
+      PUT: (id: string) => appendBasePath(`User/posts/${id}`),
+      DELETE: (id: string) => appendBasePath(`Posts/${id}`),
       Comments: {
-        GET: (postId: string) => `/api/User/Posts/${postId}/comments`,
-        GETAll: `/api/User/comments`,
-        POST: (postId: string) => `/api/User/Posts/${postId}/comments`,
+        GET: (postId: string) => appendBasePath(`User/Posts/${postId}/comments`),
+        GETAll: () => appendBasePath('User/comments'),
+        POST: (postId: string) => appendBasePath(`User/Posts/${postId}/comments`),
         DELETE: (postId: string, commentId: string) =>
-          `/api/Posts/${postId}/comments/${commentId}`,
-        PUT: (id: string) => `/api/User/comments/${id}`,
+          appendBasePath(`Posts/${postId}/comments/${commentId}`),
+        PUT: (id: string) => appendBasePath(`User/comments/${id}`),
       },
       UpdatePassword: {
-        PUT: '/api/User/password',
+        PUT: () => appendBasePath('User/password'),
       },
       ForgotPassword: {
-        GET: '/api/User/forgot-password',
-        PUT: '/api/User/forgot-password',
+        GET: () => appendBasePath('User/forgot-password'),
+        PUT: () => appendBasePath('User/forgot-password'),
       },
     },
   },
   Posts: {
-    GET_All: '/api/Posts', // Route for getting all posts (not user-specific)
-    GET: (postId: string) => {
-      `/api/Posts/${postId}`;
-    }, // Route for getting all posts (not user-specific)
-    DELETE: (postId: string) => {
-      `/api/Posts/${postId}`;
-    }, // Route for getting all posts (not user-specific)
-    GET_Comments: (postId: string) => {
-      `/api/Posts/${postId}/comments`;
-    }, // Route for getting all posts (not user-specific)
+    GET_All: () => appendBasePath('Posts'), // Route for getting all posts (not user-specific)
+    GET: (postId: string) => appendBasePath(`Posts/${postId}`), // Route for getting all posts (not user-specific)
+    DELETE: (postId: string) => appendBasePath(`Posts/${postId}`), // Route for getting all posts (not user-specific)
+    GET_Comments: (postId: string) => appendBasePath(`Posts/${postId}/comments`), // Route for getting all posts (not user-specific)
   },
   ApprovalRequests: {
-    POST: '/api/User/approval-request',
-    PUT: '/api/User/approval-Request',
-    GET_ALL: '/api/User/approval-request',
+    POST: () => appendBasePath('User/approval-request'),
+    PUT: () => appendBasePath('User/approval-Request'),
+    GET_ALL: () => appendBasePath('User/approval-request'),
   },
 };
+
+
+
+// export const RouteCategories = {
+//   User: {
+//     Posts: {
+//       GET: 'User/posts',
+//       POST: 'User/posts',
+//       PUT: (id: string) => `User/posts/${id}`,
+//       DELETE: (id: string) => `Posts/${id}`,
+//       Comments: {
+//         GET: (postId: string) => `User/Posts/${postId}/comments`,
+//         GETAll: `User/comments`,
+//         POST: (postId: string) => `User/Posts/${postId}/comments`,
+//         DELETE: (postId: string, commentId: string) =>
+//           `Posts/${postId}/comments/${commentId}`,
+//         PUT: (id: string) => `User/comments/${id}`,
+//       },
+//       UpdatePassword: {
+//         PUT: 'User/password',
+//       },
+//       ForgotPassword: {
+//         GET: 'User/forgot-password',
+//         PUT: 'User/forgot-password',
+//       },
+//     },
+//   },
+//   Posts: {
+//     GET_All: 'Posts', // Route for getting all posts (not user-specific)
+//     GET: (postId: string) => 
+//       `Posts/${postId}`
+//     , // Route for getting all posts (not user-specific)
+//     DELETE: (postId: string) => 
+//       `Posts/${postId}`
+//     , // Route for getting all posts (not user-specific)
+//     GET_Comments: (postId: string) => 
+//       `Posts/${postId}/comments`
+//     , // Route for getting all posts (not user-specific)
+//   },
+//   ApprovalRequests: {
+//     POST: 'User/approval-request',
+//     PUT: 'User/approval-Request',
+//     GET_ALL: 'User/approval-request',
+//   },
+// };
 
 
 

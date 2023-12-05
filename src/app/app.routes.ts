@@ -6,11 +6,13 @@ import { MainComponent } from './pages/mainPage/main.component';
 import { HomePageComponent } from './pages/HomePage/HomePage.component';
 import { PostViewComponent } from './Components/PostView/PostView.component';
 import { PostListPageComponent } from './pages/PostListPage/PostListPage.component';
+import { authGuardGuard } from './routes/AuthGuard.guard';
 
 export const routes: Routes = [
   {
     path: 'home',
     component: AppComponent,
+    canActivate: [authGuardGuard],
   },
   {
     path: 'login',
@@ -24,6 +26,7 @@ export const routes: Routes = [
   {
     path: 'forum',
     component: MainComponent,
+    canActivate: [authGuardGuard],
     children: [
       {
         path: 'PostDetails/:id',
