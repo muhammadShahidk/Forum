@@ -1,20 +1,16 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
-    class="sidenav"
+    class="p-3"
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
+    <app-side-bar></app-side-bar>
   </mat-sidenav>
   <mat-sidenav-content>
+    <!-- header nav bar -->
     <mat-toolbar color="primary">
       <!-- header -->
       @if (isHandset$ | async) {
@@ -27,40 +23,36 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       }
-      <!-- create logout button -->
-      <button class mat-button class="ml-auto" (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-      </button>
+      <img
+        class="h-5/6 mx-3"
+        src="../../../assets/images/ForumIcon.png"
+        alt=""
+      />
+      <span class="block ml- 5">Forum</span>
 
-      <span class="block ml-5">Forum</span>
-    </mat-toolbar>
-    <main class="w-11/12 sm:w-8/12 m-auto">
-      <mat-list role="list">
-        <mat-list-item role="listitem">{{ user().firstName }}</mat-list-item>
-        <mat-list-item role="listitem">{{ user().lastName }}</mat-list-item>
-        <mat-list-item role="listitem">{{ user().email }}</mat-list-item>
-      </mat-list>
+      <div class="flex items-center justify-between gap-4 flex-1">
+        <!-- logout button -->
+        <button class mat-button class="ml-auto" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
 
-      <!-- user rools -->
-      <mat-chip-listbox aria-label="Dog selection">
-        @for (item of user().rools; track $index) {
-        <mat-chip>
-          <img
-            matChipAvatar
-            src="https://material.angular.io/assets/img/examples/shiba1.jpg"
-            alt="Photo of a Shiba Inu"
-          />
-          {{ item }}
+        <!-- User name -->
+        <mat-chip [matMenuTriggerFor]="menu">
+          <mat-icon color="class" matChipAvatar>account_circle</mat-icon>
+          {{ user().firstName }}
         </mat-chip>
-        }
-      </mat-chip-listbox>
 
-      <!-- see posts -->
-      <button mat-raised-button color="primary" routerLink="posts">
-        See posts
-      </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Profile Settings</span>
+          </button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
 
+    <main class="w-11/12 mt-16  sm:w-8/12 m-auto ">
 
       <router-outlet></router-outlet>
     </main>

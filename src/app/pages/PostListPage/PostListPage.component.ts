@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { PostComponent } from '../../Components/Post/Post.component';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +25,8 @@ import { PostService } from '../../Services/PostService';
 export class PostListPageComponent implements OnInit {
   posts$?:Promise<PostResponseDto[]> ;
 
+  date? = signal<Date>(new Date());
+
   getData() {
     this.posts$ = this.postService.getPosts();
   }
@@ -33,5 +35,7 @@ export class PostListPageComponent implements OnInit {
     this.posts$ = this.postService.getPosts();
     console.log("this.posts$")
     console.log(this.posts$)
+    const datecreated = this.posts$?.then((posts)=>{return posts[0].dateCreated});
+    // this.date?.set( this.posts$.then((posts)=>{return posts.dateCreated}))
   }
  }

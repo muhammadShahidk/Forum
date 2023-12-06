@@ -13,6 +13,8 @@ import { AuthService } from '../../Services/Auth.service';
 import { UserRequestDto, UserResponseDto } from '../../Modals/Dtos/userDto';
 import { MatChipsModule } from '@angular/material/chips';
 import { PostComponent } from '../../Components/Post/Post.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { SideBarComponent } from '../../Components/sideBar/sideBar.component';
 
 @Component({
   selector: 'app-main',
@@ -24,6 +26,8 @@ import { PostComponent } from '../../Components/Post/Post.component';
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
+    SideBarComponent,
+    MatMenuModule,
     MatChipsModule,
     MatIconModule,
     RouterLink,

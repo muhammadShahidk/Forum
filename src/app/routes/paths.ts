@@ -1,5 +1,5 @@
 
-export const _basePath = 'https://localhost:44344/api';
+export const _basePath = 'https://localhost:44376/api';
 
 export const PATH_AUTH = {
   login: 'Auth/login',

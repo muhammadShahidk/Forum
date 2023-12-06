@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges, signal } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,19 +23,55 @@ import { PostRequestDto, PostResponseDto } from '../../Modals/Dtos/PostDto';
   styleUrl: './Post.component.css',
 })
 
-export class PostComponent {
+export class PostComponent implements   OnChanges   {
   constructor (private router: Router,private route:ActivatedRoute){}
+
+  
+  ngOnChanges(changes: SimpleChanges): void{
+      console.log("post changed")
+      debugger
+      if(this.post?.dateCreated !== undefined){
+        
+        this.date?.set(this.post?.dateCreated)
+      }
+  }
 
 // ...
 @Input()
 post?:PostResponseDto
-
 
 ViewDetails() {
   const postId = Math.floor(Math.random() * 10) + 1;
   console.log("activated route" + this.route)
   this.router.navigate(['PostDetails', postId],{ relativeTo: this.route.parent });
 }
+
+createdOn = () => {
+  console.log(this.post?.dateCreated);
+  console.log("calculating date");
+  if(this.post?.dateCreated === undefined){
+    return '';
+
+  }
+  if (this.post?.dateCreated) {
+    const currentDate = new Date();
+    const diffInMinutes = Math.floor((currentDate.getTime() - this.post?.dateCreated.getTime()) / (1000 * 60));
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes} minutes ago`;
+    } else if (diffInMinutes < 1440) {
+      const diffInHours = Math.floor(diffInMinutes / 60);
+      return `${diffInHours} hours ago`;
+    } else {
+      const diffInDays = Math.floor(diffInMinutes / 1440);
+      return `${diffInDays} days ago`;
+    }
+  }
+  return '';
+}
+
+date? = signal<Date>(new Date());
+
+
   title:string = "What do you think about manshera"
   user:string ="shahid"
 

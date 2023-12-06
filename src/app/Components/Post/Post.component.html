@@ -1,18 +1,16 @@
-<mat-card class=" m-auto mb-2">
- <app-post-header user={{user}} title={{post?.title}}></app-post-header>
+<mat-card class=" m-auto mb-10 p-3">
+    <app-post-header [date]="date" user={{user}} title={{post?.title}}></app-post-header>
 
-  <mat-card-content p-5>
-    <p>
+  <mat-card-content  >
+    <p class="pl-5 border p-3">
       {{ post?.content?.split(' ')?.slice(0, 25)?.join(' ') }} ....
 
     </p>
-    <span class="block bg-blue-500 text-yellow-50">
-        {{ post?.dateCreated | date: 'dd/MM/yyyy' }}
-    </span>
+    
   </mat-card-content>
 
   <mat-card-actions>
-    <div class="flex items-center justify-between w-11/12">
+    <div class="flex items-center justify-between w-11/12 mt-3">
       <button (click)="ViewDetails()" mat-stroked-button>View Details</button>
 
       <div class="flex items-center gap-3">
