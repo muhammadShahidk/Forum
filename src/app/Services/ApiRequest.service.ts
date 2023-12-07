@@ -13,7 +13,7 @@ export class ApiRequestService {
     try {
       const response = await firstValueFrom(request);
       
-      console.info("handle request response");
+      console.info("%c handle request response", "color: blue");
       console.log(response);
       // print the T type name
       return response;

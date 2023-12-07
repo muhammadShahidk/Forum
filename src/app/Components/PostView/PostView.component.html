@@ -1,5 +1,5 @@
 <h1>Post View</h1>
-<app-post [post]="post$"></app-post>
+<app-post [isPostView]="true" [post]="post$"></app-post>
 <!-- creat comment box-->
 
 <!-- create a box for adding comments using angulaSr metrial -->
@@ -13,7 +13,7 @@
 <div class="px-3 py-6 my-9 shadow-md">
     <mat-form-field class="w-full">
         <mat-label>Leave Comment</mat-label>
-        <input  matInput type="text" [(ngModel)]="value">
+        <input (change)="CreateNewComment()"   matInput type="text" [(ngModel)]="value">
         @if (value) {
           <button matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
             <mat-icon>close</mat-icon>
@@ -31,7 +31,7 @@
 @for (item of commentsToPost$; track $index) {
   <!-- show item content -->
 
-  <app-post [post]="item"></app-post>
+  <app-post [post]="item" [isComment]="true"></app-post>
   <!-- <ul class="border p-2 m-5 ">
     <li>content: {{item.content}}</li>
     <li>dateCreateAt: {{item.dateCreateAt}}</li>

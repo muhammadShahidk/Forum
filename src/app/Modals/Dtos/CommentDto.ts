@@ -3,7 +3,7 @@ import { PostResponseDto } from "./PostDto";
 export interface CommentResponceDto {
     commentId: number;
     userID: string;
-    dateCreateAt: string;
+    dateCreateAt: Date;
     username: string;
     name: string;
     content: string;

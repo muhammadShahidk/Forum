@@ -63,7 +63,7 @@ export class PostViewComponent implements OnInit {
       (comment) => new CommentToPost(comment)
     );
     console.log('commentsToPost$');
-    console.log(this.commentsToPost$);
+    console.log(this.commentsToPost$[0].dateCreated);
 
     this.post$ = post; // Fix: Assign the 'post' value to 'this.post$'
     console.log('current post');

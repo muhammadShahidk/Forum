@@ -18,6 +18,8 @@ export class PostHeaderComponent {
   @Input()
   title: string = 'Title';
 
+  @Input() isComment = false;
+
   @Input()
   date? = signal<Date>(new Date());
 
@@ -31,8 +33,8 @@ export class PostHeaderComponent {
       return '';
 
     }
-    console.log(this.date());
-    console.log("calculating date");
+    // console.log(this.date());
+    // console.log("calculating date");
     if(this.date() === undefined){
       return '';
 

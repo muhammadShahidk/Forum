@@ -1,38 +1,57 @@
-<mat-card class=" m-auto mb-10 p-3">
-    <app-post-header [date]="date" user={{post?.name}} title={{post?.title}}></app-post-header>
+<mat-card class="m-auto mb-10 p-3">
+  @if ( isComment ) {
 
-  <mat-card-content  >
+  <app-post-header
+    [date]="date"
+    user="{{ post?.name }}"
+    [isComment]="true"
+  ></app-post-header>
+  }@else {
+  <app-post-header
+    [date]="date"
+    user="{{ post?.username }}"
+    title="{{ post?.title }}"
+  ></app-post-header>
+  }
+
+  <mat-card-content>
     <p class="pl-5 border p-3">
-      {{ post?.content?.split(' ')?.slice(0, 25)?.join(' ') }} ....
+      @if (!isComment && !isPostView ) {
 
+      {{ post?.content?.split(" ")?.slice(0, 25)?.join(" ") }} .... } @else {
+      {{ post?.content }}
+      }
     </p>
-    
   </mat-card-content>
-
+  @if (!isComment) {
   <mat-card-actions>
     <div class="flex items-center justify-between w-11/12 mt-3">
+      @if (!isPostView) {
+
       <button (click)="ViewDetails()" mat-stroked-button>View Details</button>
+      }
 
       <div class="flex items-center gap-3">
         <!-- Icon views-->
-        <div class="flex  items-center gap-2">
+        <div class="flex items-center gap-2">
           <mat-icon [classList]="IconStyles">visibility</mat-icon>
           <span>10</span>
         </div>
 
         <!-- Icon comments -->
-        <div class="flex  items-center gap-2">
+        <div class="flex items-center gap-2">
           <mat-icon [classList]="IconStyles">comment</mat-icon>
           <span>10</span>
         </div>
 
         <!-- Icon -->
-        <div class="flex  items-center gap-2">
+        <div class="flex items-center gap-2">
           <mat-icon [classList]="IconStyles">arrow_upward</mat-icon>
           <span>10</span>
         </div>
       </div>
     </div>
-
   </mat-card-actions>
+
+  }
 </mat-card>
