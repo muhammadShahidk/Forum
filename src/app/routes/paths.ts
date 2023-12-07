@@ -22,10 +22,10 @@ export const RouteCategories = {
       PUT: (id: string) => appendBasePath(`User/posts/${id}`),
       DELETE: (id: string) => appendBasePath(`Posts/${id}`),
       Comments: {
-        GET: (postId: number) => appendBasePath(`User/Posts/${postId}/comments`),
+        GET: (postId: number) => appendBasePath(`User/posts/${postId}/comments`),
         GETAll: () => appendBasePath('User/comments'),
-        POST: (postId: string) => appendBasePath(`User/Posts/${postId}/comments`),
-        DELETE: (postId: string, commentId: string) =>
+        POST: (postId: number) => appendBasePath(`User/posts/${postId}/comments`),
+        DELETE: (postId: number, commentId: number) =>
           appendBasePath(`Posts/${postId}/comments/${commentId}`),
         PUT: (id: string) => appendBasePath(`User/comments/${id}`),
       },

@@ -34,6 +34,19 @@ import {
   styleUrl: './PostView.component.css',
 })
 export class PostViewComponent implements OnInit {
+  async CreateNewComment() {
+    console.log('CreateNewComment');
+    await this.postService.addCommentToPost(this.postId$,{content:this.value});
+    
+    // getting latest comments
+    const comments = await this.postService.getPostComments(this.postId$);
+    this.commentsToPost$ = comments.map(
+      (comment) => new CommentToPost(comment)
+    );
+    this.value = '';
+  }
+
+
   postId$: number = 0;
 
   async getPost(postId: number) {
@@ -46,9 +59,11 @@ export class PostViewComponent implements OnInit {
     const comments = await this.postService.getPostComments(this.postId$);
 
     this.comments$ = comments;
-    this.commentsToPost$ = comments.map((comment) => new CommentToPost(comment));
-    console.log("commentsToPost$")
-    console.log(this.commentsToPost$)
+    this.commentsToPost$ = comments.map(
+      (comment) => new CommentToPost(comment)
+    );
+    console.log('commentsToPost$');
+    console.log(this.commentsToPost$);
 
     this.post$ = post; // Fix: Assign the 'post' value to 'this.post$'
     console.log('current post');

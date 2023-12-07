@@ -2,13 +2,14 @@ export interface PostResponseDto extends PostRequestDto {
   postID: number;
   UserID: string;
   dateCreated: Date;
+  username: string;
+  name: string;
 }
 
 export interface PostRequestDto {
-   title?: string | null;
-   content?: string | null;
- }
-
+  title?: string ;
+  content?: string ;
+}
 
 //  {
 //   "postID": 1,
@@ -17,3 +18,11 @@ export interface PostRequestDto {
 //   "title": "very nice post 2 ",
 //   "content": "how are you mister shahid"
 // }
+
+// postID: number;
+// userID: string;
+// dateCreated: string;
+// username: string;
+// name: string;
+// title: string;
+// content: string;

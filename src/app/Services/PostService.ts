@@ -4,7 +4,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { RouteCategories } from '../routes/paths';
 import { PostResponseDto } from '../Modals/Dtos/PostDto';
 import { ApiRequestService } from './ApiRequest.service';
-import { CommentResponceDto } from '../Modals/Dtos/CommentDto';
+import { CommentRequestDto, CommentResponceDto } from '../Modals/Dtos/CommentDto';
 
 @Injectable({
   providedIn: 'root',
@@ -41,9 +41,12 @@ export class PostService {
       return await this.api.handleRequest(this.http.get<CommentResponceDto[]>(url));
     }
 
+
+    // add comment to post
+    async addCommentToPost(postId: number, comment:CommentRequestDto): Promise<any> {
+      const url = RouteCategories.User.Posts.Comments.POST(postId);
+      return await this.api.handleRequest(this.http.post(url, comment));
+    }
     
-    // async getComments(postId: number): Promise<CommentResponceDto[]> {
-    //   const url = RouteCategories.User.Posts.Comments.GET(postId);
-    //   return await this.api.handleRequest(this.http.get<CommentResponceDto[]>(url));
-    // }
+ 
   }

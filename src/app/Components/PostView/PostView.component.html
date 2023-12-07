@@ -22,8 +22,8 @@
       </mat-form-field>
     
   <div class="flex gap-4 mt-5 justify-end">
-    <button mat-raised-button color="accent" >Cencel</button>
-    <button mat-raised-button color="primary">Suggest</button>
+    <button (click)="value=''" mat-raised-button color="accent" >Cencel</button>
+    <button (click)="CreateNewComment()" mat-raised-button color="primary">Suggest</button>
   </div>
 </div>
 <!-- list of comments -->

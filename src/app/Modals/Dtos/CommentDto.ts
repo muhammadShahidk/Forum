@@ -14,17 +14,27 @@ export interface CommentResponceDto {
       postID: number;
       UserID: string;
       dateCreated: Date;
-      title?: string | null | undefined;
-      content?: string | null | undefined;
+ 
 
        constructor(commentResponseDto:CommentResponceDto){
             this.postID = 0;
             this.UserID = commentResponseDto.userID;
             this.dateCreated = new Date(commentResponseDto.dateCreateAt);
-            this.title = commentResponseDto.name;
+            this.title = commentResponseDto.content;
             this.content = commentResponseDto.content;
+            this.username = commentResponseDto.username;
+            this.name = commentResponseDto.name;
         }
+      username: string;
+      name: string;
+      title?: string | undefined;
+      content?: string | undefined;
+ 
     //map commentResponseDto to PostResponseDto in constructor
 
   }
     
+
+  export interface CommentRequestDto {
+    content: string;
+  }
