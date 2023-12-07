@@ -5,6 +5,8 @@ import { UserRegisterDto } from '../Modals/Dtos/UserRegisterDto';
 import { UserLoginDto } from '../Modals/Dtos/UserLoginDto';
 import { Observable, firstValueFrom } from 'rxjs';
 import { UserRequestDto, UserResponseDto } from '../Modals/Dtos/userDto';
+import { ApiRequestService } from './ApiRequest.service';
+import { ApprovalRequestDto, ApprovalResponseDto } from '../Modals/Dtos/ApprovalDto';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +14,13 @@ import { UserRequestDto, UserResponseDto } from '../Modals/Dtos/userDto';
 export class AuthService {
   Token: string = '';
 
-  constructor(private htpp: HttpClient) {}
+  constructor(private http: HttpClient,private api:ApiRequestService) {}
 
-  // create a method to store the token in local storage
   storeToken(token: string): void {
 
     console.log('token', token);
     localStorage.setItem('token', token);
+
   }
 
   // create a method to get the token from local storage
@@ -27,30 +29,30 @@ export class AuthService {
   }
 
   // create a method to handle API requests
-  private async handleRequest<T>(request: Observable<T>): Promise<T> {
-    try {
-      const response = await firstValueFrom(request);
-      console.log(response);
-      return response;
-    } catch (error) {
-      debugger
-      console.error(error);
-      throw new Error(`${(error as any).error}`);
+    private async handleRequest<T>(request: Observable<T>): Promise<T> {
+      try {
+        const response = await firstValueFrom(request);
+        console.log(response);
+        return response;
+      } catch (error) {
+        debugger
+        console.error(error);
+        throw new Error(`${(error as any).error}`);
+      }
     }
-  }
 
   // register method
   async Register(user: UserRegisterDto): Promise<any> {
-    return this.handleRequest<any>(
-      this.htpp.post(`${_basePath}/${PATH_AUTH.register}`, user)
+    return this.api.handleRequest<any>(
+      this.http.post(`${_basePath}/${PATH_AUTH.register}`, user)
     );
   }
 
   // login method
   async Login(user: UserLoginDto): Promise<any> {
     try {
-      const response = await this.handleRequest<loginResponse>(
-        this.htpp.post<loginResponse>(`${_basePath}/${PATH_AUTH.login}`, user)
+      const response = await this.api.handleRequest<loginResponse>(
+        this.http.post<loginResponse>(`${_basePath}/${PATH_AUTH.login}`, user)
       );
 
       console.log(response.isSucceed);
@@ -82,11 +84,18 @@ export class AuthService {
     }
   }
 
+  // make approval request
+  async MakeApprovalRequest(request:ApprovalRequestDto): Promise<ApprovalResponseDto> {
+    return this.api.handleRequest(
+      this.http.post<ApprovalResponseDto>(RouteCategories.ApprovalRequests.POST(), request)
+    );
+  }
+
   //get user details
   async getUserDetails(): Promise<UserResponseDto> {
     try {
-      const response = await this.handleRequest<UserResponseDto>(
-        this.htpp.get<UserResponseDto>(`${RouteCategories.User.GET()}`)
+      const response = await this.api.handleRequest<UserResponseDto>(
+        this.http.get<UserResponseDto>(`${RouteCategories.User.GET()}`)
       );
       return response;
     } catch (error) {

@@ -34,19 +34,22 @@ export class RegisterComponent {
 
   constructor(private _router: Router, private _authService: AuthService) {}
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.addressForm.valid) {
       const form = this.addressForm.value;
       const { username, password, firstName, email, lastName } = form;
       
       console.log(form);
-      this._authService.Register({
+      await this._authService.Register({
         userName: username ?? "",
         password: password ?? "",
         firstName: firstName ?? "",
         email: email ?? "",
         lastName: lastName ?? "",
       });
+
+      await this._authService.MakeApprovalRequest({username:username ?? ""})
+      console.info('your approval request has been sent to admin please wait for approval');
     }
   }
 }

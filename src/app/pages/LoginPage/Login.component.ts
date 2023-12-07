@@ -141,6 +141,7 @@ export class LoginComponent {
       };
 
       const user = await this.authService.Login(userLoginDto);
+      
       // Do something with the user object
       console.log('login response');
       console.log(user);

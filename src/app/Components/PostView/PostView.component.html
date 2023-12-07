@@ -1,39 +1,8 @@
 <h1>Post View</h1>
-<mat-card>
-  <app-post-header title="title" user="user"></app-post-header>
-
-  <mat-card-content p-5>
-    <!-- body -->
-    <div>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae
-      autem vitae facilis dignissimos molestias eum voluptatem id tenetur
-      laudantium molestiae quia sunt assumenda quidem blanditiis modi quo quos
-      placeat similique excepturi quaerat, dolores magni! Delectus sint dolorem
-      assumenda odio consectetur iste, voluptatibus voluptate doloribus nisi
-      impedit maxime veritatis soluta molestiae.
-    </div>
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <!-- footer -->
-    <div class="flex gap-5">
-      <div>
-        <mat-icon>visibility</mat-icon>
-        <span>10</span>
-      </div>
-      <div>
-        <mat-icon>comment</mat-icon>
-        <span>10</span>
-      </div>
-      <div>
-        <mat-icon>arrow_upward</mat-icon>
-        <span>10</span>
-      </div>
-    </div>
-  </mat-card-actions>
-</mat-card>
+<app-post [post]="post$"></app-post>
 <!-- creat comment box-->
 
-<!-- create a box for adding comments using angular metrial -->
+<!-- create a box for adding comments using angulaSr metrial -->
 
 <div class="my-5 text-center">
     <h1 class="text-4xl bg-gray-400text-center text-slate-600">
@@ -59,10 +28,20 @@
 </div>
 <!-- list of comments -->
 
-<!-- @for (item of [1,2,3,4]; track $index) {
-    <app-post></app-post>
-} -->
-<button (click)="getData()">get data</button>
+@for (item of commentsToPost$; track $index) {
+  <!-- show item content -->
 
-{{posts$ | async | json}}
+  <app-post [post]="item"></app-post>
+  <!-- <ul class="border p-2 m-5 ">
+    <li>content: {{item.content}}</li>
+    <li>dateCreateAt: {{item.dateCreateAt}}</li>
+    <li>commentId: {{item.commentId}}</li>
+    <li>userID: {{item.userID}}</li>
+    <li>userID: {{item.username}}</li>
+    <li>userID: {{item.name}}</li>
+  </ul> -->
+}
+
+<!-- {{posts$ | async | json}}
+{{post$ | async | json}} -->
 

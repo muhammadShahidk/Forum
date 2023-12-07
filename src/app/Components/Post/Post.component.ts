@@ -28,12 +28,14 @@ export class PostComponent implements   OnChanges   {
 
   
   ngOnChanges(changes: SimpleChanges): void{
-      console.log("post changed")
-      debugger
-      if(this.post?.dateCreated !== undefined){
-        
-        this.date?.set(this.post?.dateCreated)
+      if(changes['post']){
+        console.log("post changed")
+        if(this.post?.dateCreated !== undefined){
+          
+          this.date?.set(this.post?.dateCreated)
+        }
       }
+    
   }
 
 // ...
@@ -41,9 +43,8 @@ export class PostComponent implements   OnChanges   {
 post?:PostResponseDto
 
 ViewDetails() {
-  const postId = Math.floor(Math.random() * 10) + 1;
   console.log("activated route" + this.route)
-  this.router.navigate(['PostDetails', postId],{ relativeTo: this.route.parent });
+  this.router.navigate(['PostDetails', this.post?.postID],{ relativeTo: this.route.parent });
 }
 
 createdOn = () => {

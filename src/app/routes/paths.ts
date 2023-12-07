@@ -22,7 +22,7 @@ export const RouteCategories = {
       PUT: (id: string) => appendBasePath(`User/posts/${id}`),
       DELETE: (id: string) => appendBasePath(`Posts/${id}`),
       Comments: {
-        GET: (postId: string) => appendBasePath(`User/Posts/${postId}/comments`),
+        GET: (postId: number) => appendBasePath(`User/Posts/${postId}/comments`),
         GETAll: () => appendBasePath('User/comments'),
         POST: (postId: string) => appendBasePath(`User/Posts/${postId}/comments`),
         DELETE: (postId: string, commentId: string) =>
@@ -40,9 +40,9 @@ export const RouteCategories = {
   },
   Posts: {
     GET_All: () => appendBasePath('Posts'), // Route for getting all posts (not user-specific)
-    GET: (postId: string) => appendBasePath(`Posts/${postId}`), // Route for getting all posts (not user-specific)
-    DELETE: (postId: string) => appendBasePath(`Posts/${postId}`), // Route for getting all posts (not user-specific)
-    GET_Comments: (postId: string) => appendBasePath(`Posts/${postId}/comments`), // Route for getting all posts (not user-specific)
+    GET: (postId: number) => appendBasePath(`Posts/${postId}`), // Route for getting all posts (not user-specific)
+    DELETE: (postId: number) => appendBasePath(`Posts/${postId}`), // Route for getting all posts (not user-specific)
+    GET_Comments: (postId: number) => appendBasePath(`Posts/${postId}/comments`), // Route for getting all posts (not user-specific)
   },
   ApprovalRequests: {
     POST: () => appendBasePath('User/approval-request'),
