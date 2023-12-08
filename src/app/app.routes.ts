@@ -6,8 +6,8 @@ import { authGuardGuard } from './routes/AuthGuard.guard';
 import { LoginComponent } from './pages/LoginPage/Login.component';
 import { RegisterComponent } from './pages/registerPage/register.component';
 import { PostListComponent } from './Components/PostComponents/PostList/PostList.component';
-import { PostsComponent } from './Pages/Posts/Posts.component';
-import { YourPostsComponent } from './Pages/YourPosts/YourPosts.component';
+import { PostsComponent } from './Pages/PostsPage/PostsPage.component';
+import { YourPostsComponent } from './Pages/YourPostsPage/YourPostsPage.component';
 
 export const routes: Routes = [
   {
