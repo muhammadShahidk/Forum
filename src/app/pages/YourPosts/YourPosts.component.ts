@@ -10,4 +10,6 @@ import { Component } from '@angular/core';
   templateUrl: './YourPosts.component.html',
   styleUrl: './YourPosts.component.css',
 })
-export class YourPostsComponent { }
+export class YourPostsComponent {
+
+}
