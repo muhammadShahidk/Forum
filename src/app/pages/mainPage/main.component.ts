@@ -12,7 +12,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../Services/Auth.service';
 import { UserRequestDto, UserResponseDto } from '../../Modals/Dtos/userDto';
 import { MatChipsModule } from '@angular/material/chips';
-import { PostComponent } from '../../Components/Post/Post.component';
+import { PostComponent } from '../../Components/PostComponents/Post/Post.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { SideBarComponent } from '../../Components/sideBar/sideBar.component';
 

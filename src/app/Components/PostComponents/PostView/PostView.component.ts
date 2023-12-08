@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PostHeaderComponent } from '../PostComponents/PostHeader/PostHeader.component';
+import { PostHeaderComponent } from '../PostHeader/PostHeader.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { PostComponent } from '../Post/Post.component';
-import { PostService } from '../../Services/PostService';
-import { PostResponseDto } from '../../Modals/Dtos/PostDto';
+import { PostService } from '../../../Services/PostService';
+import { PostResponseDto } from '../../../Modals/Dtos/PostDto';
 import {
   CommentResponceDto,
   CommentToPost,
-} from '../../Modals/Dtos/CommentDto';
+} from '../../../Modals/Dtos/CommentDto';
 
 @Component({
   selector: 'app-post-view',

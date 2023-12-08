@@ -12,15 +12,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
-import { PostTailwindcssComponent } from '../PostTailwindcss/PostTailwindcss.component';
+import { PostTailwindcssComponent } from '../../PostTailwindcss/PostTailwindcss.component';
 import {
   ActivatedRoute,
   Router,
   RouterLink,
   RouterLinkActive,
 } from '@angular/router';
-import { PostHeaderComponent } from '../PostComponents/PostHeader/PostHeader.component';
-import { PostRequestDto, PostResponseDto } from '../../Modals/Dtos/PostDto';
+import { PostHeaderComponent } from '../PostHeader/PostHeader.component';
+import { PostRequestDto, PostResponseDto } from '../../../Modals/Dtos/PostDto';
 @Component({
   selector: 'app-post',
   standalone: true,
@@ -81,7 +81,7 @@ export class PostComponent implements OnChanges {
     }
     return '';
   };
-  
+
   @Input() isComment:boolean = false;
   @Input() isPostView:boolean = false;
   date? = signal<Date>(new Date());
