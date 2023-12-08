@@ -1,5 +1,6 @@
 
-export const _basePath = 'https://localhost:44376/api';
+// export const _basePath = 'https://localhost:44376/api';
+export const _basePath = 'https://localhost:44344/api';
 
 export const PATH_AUTH = {
   login: 'Auth/login',
@@ -79,13 +80,13 @@ export const RouteCategories = {
 //   },
 //   Posts: {
 //     GET_All: 'Posts', // Route for getting all posts (not user-specific)
-//     GET: (postId: string) => 
+//     GET: (postId: string) =>
 //       `Posts/${postId}`
 //     , // Route for getting all posts (not user-specific)
-//     DELETE: (postId: string) => 
+//     DELETE: (postId: string) =>
 //       `Posts/${postId}`
 //     , // Route for getting all posts (not user-specific)
-//     GET_Comments: (postId: string) => 
+//     GET_Comments: (postId: string) =>
 //       `Posts/${postId}/comments`
 //     , // Route for getting all posts (not user-specific)
 //   },
