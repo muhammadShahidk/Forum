@@ -7,11 +7,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { PostResponseDto } from '../../../Modals/Dtos/PostDto';
 import { PostService } from '../../../Services/PostService';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
-  imports: [CommonModule, PostComponent, MatIconModule, MatButtonModule],
+  imports: [RouterLink,CommonModule, PostComponent, MatIconModule, MatButtonModule],
   templateUrl: './PostList.component.html',
   styleUrl: './PostList.component.css',
 })

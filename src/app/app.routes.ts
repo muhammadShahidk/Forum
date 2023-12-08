@@ -8,6 +8,7 @@ import { RegisterComponent } from './pages/registerPage/register.component';
 import { PostListComponent } from './Components/PostComponents/PostList/PostList.component';
 import { PostsComponent } from './Pages/PostsPage/PostsPage.component';
 import { YourPostsComponent } from './Pages/YourPostsPage/YourPostsPage.component';
+import { NewPostPageComponent } from './Pages/NewPostPage/NewPostPage.component';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,10 @@ export const routes: Routes = [
       {
         path: 'User/posts',
         component: YourPostsComponent,
+      },
+      {
+        path: 'User/NewPost',
+        component: NewPostPageComponent,
       },
     ],
   },
