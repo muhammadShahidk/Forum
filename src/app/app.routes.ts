@@ -6,6 +6,8 @@ import { authGuardGuard } from './routes/AuthGuard.guard';
 import { LoginComponent } from './pages/LoginPage/Login.component';
 import { RegisterComponent } from './pages/registerPage/register.component';
 import { PostListComponent } from './Components/PostComponents/PostList/PostList.component';
+import { PostsComponent } from './Pages/Posts/Posts.component';
+import { YourPostsComponent } from './Pages/YourPosts/YourPosts.component';
 
 export const routes: Routes = [
   {
@@ -33,9 +35,13 @@ export const routes: Routes = [
       },
       {
         path: 'posts',
-        component: PostListComponent,
+        component: PostsComponent,
       },
-    ]
+      {
+        path: 'User/posts',
+        component: YourPostsComponent,
+      },
+    ],
   },
 
   { path: '', redirectTo: '/forum/posts', pathMatch: 'full' },

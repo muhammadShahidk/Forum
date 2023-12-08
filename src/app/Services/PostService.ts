@@ -13,6 +13,15 @@ import {
   providedIn: 'root',
 })
 export class PostService {
+  async getUserPosts(): Promise<PostResponseDto[]> {
+     const responses = await this.api.handleRequest(
+       this.http.get<PostResponseDto[]>(RouteCategories.User.Posts.GET())
+     );
+     return responses.sort((a, b) => {
+       return Number(new Date(b.dateCreated)) - Number(new Date(a.dateCreated));
+     });
+  }
+
   constructor(private http: HttpClient, private api: ApiRequestService) {}
 
   async getPosts(): Promise<PostResponseDto[]> {
