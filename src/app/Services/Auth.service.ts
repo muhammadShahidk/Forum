@@ -7,6 +7,7 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { UserRequestDto, UserResponseDto } from '../Modals/Dtos/userDto';
 import { ApiRequestService } from './ApiRequest.service';
 import { ApprovalRequestDto, ApprovalResponseDto } from '../Modals/Dtos/ApprovalDto';
+import { ApiResponceDto, apiResponce } from '../Modals/Dtos/ApiResponceDto';
 
 @Injectable({
   providedIn: 'root',
@@ -28,18 +29,7 @@ export class AuthService {
     return localStorage.getItem('token') || '';
   }
 
-  // create a method to handle API requests
-    private async handleRequest<T>(request: Observable<T>): Promise<T> {
-      try {
-        const response = await firstValueFrom(request);
-        console.log(response);
-        return response;
-      } catch (error) {
-        debugger
-        console.error(error);
-        throw new Error(`${(error as any).error}`);
-      }
-    }
+
 
   // register method
   async Register(user: UserRegisterDto): Promise<any> {
@@ -51,36 +41,38 @@ export class AuthService {
   // login method
   async Login(user: UserLoginDto): Promise<any> {
     try {
-      const response = await this.api.handleRequest<loginResponse>(
-        this.http.post<loginResponse>(`${_basePath}/${PATH_AUTH.login}`, user)
+      const response = await this.api.handleRequest<apiResponce<loginResponse>>(
+        this.http.post<apiResponce<loginResponse>>(
+          `${_basePath}/${PATH_AUTH.login}`,
+          user
+        )
       );
 
-      console.log(response.isSucceed);
-      if (response.isSucceed) {
+      console.log(response.Success);
+      if (response.Success) {
         console.log("setting the token");
-        this.storeToken(response.message);
+        this.storeToken(response.Data.message);
       } else {
-        console.log(response.message);
-        throw new Error(response.message);
+        console.log(response.Data.message);
+        throw new Error(response.Data.message);
       }
 
       return response;
     } catch (error) {
-      debugger
       console.log(error);
-      const ErrorResult = (error as any).error as loginResponse;
+      const ErrorResult = (error as any).error as ApiResponceDto;
       // console.error('An error occurred:', ErrorResult.message);
-      debugger
-      if(ErrorResult){
-        throw new Error(`${ErrorResult}`);
+      // if(ErrorResult.Data?.message){
+      //   throw new Error(`${ErrorResult.Data?.message}`);
 
-      }
-      else{
-        console.log("trace 1");
-        console.log(error);
+      // }
+      // else{
+      //   console.log("trace 1");
+      //   console.log(error);
 
-        throw new Error(`${error}`);
-      }
+      //   throw new Error(`${error}`);
+      // }
+      console.log((error as any).error);
     }
   }
 
@@ -94,10 +86,12 @@ export class AuthService {
   //get user details
   async getUserDetails(): Promise<UserResponseDto> {
     try {
-      const response = await this.api.handleRequest<UserResponseDto>(
-        this.http.get<UserResponseDto>(`${RouteCategories.User.GET()}`)
+      const response = await this.api.handleRequest(
+        this.http.get<apiResponce<UserResponseDto>>(
+          `${RouteCategories.User.GET()}`
+        )
       );
-      return response;
+      return response.Data;
     } catch (error) {
       console.error(error);
       throw new Error(`${(error as any).error}`);

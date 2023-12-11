@@ -58,29 +58,6 @@ export class PostComponent implements OnChanges {
     });
   }
 
-  createdOn = () => {
-    console.log(this.post?.dateCreated);
-    console.log('calculating date');
-    if (this.post?.dateCreated === undefined) {
-      return '';
-    }
-    if (this.post?.dateCreated) {
-      const currentDate = new Date();
-      const diffInMinutes = Math.floor(
-        (currentDate.getTime() - this.post?.dateCreated.getTime()) / (1000 * 60)
-      );
-      if (diffInMinutes < 60) {
-        return `${diffInMinutes} minutes ago`;
-      } else if (diffInMinutes < 1440) {
-        const diffInHours = Math.floor(diffInMinutes / 60);
-        return `${diffInHours} hours ago`;
-      } else {
-        const diffInDays = Math.floor(diffInMinutes / 1440);
-        return `${diffInDays} days ago`;
-      }
-    }
-    return '';
-  };
 
   @Input() isComment:boolean = false;
   @Input() isPostView:boolean = false;

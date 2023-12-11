@@ -19,8 +19,8 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
 
 // print the url of the request
 console.count("Auth Interceptor");
-
-console.log(req.method +" "+ req.url);
+console.log(req.method);
+console.log(req.url);
 
   return next(req);
 }

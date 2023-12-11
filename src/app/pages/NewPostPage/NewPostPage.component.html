@@ -1,1 +1,13 @@
-<p>NewPostPage works!</p>,
+<form (ngSubmit)="Submit()" [formGroup]="newPostForm"  class="flex border p-5 rounded-sm shadow-sm vh  flex-col gap-11">
+  <mat-form-field >
+    <input matInput formControlName = "title" placeholder="title" value="Sushi">
+  </mat-form-field>
+
+  <mat-form-field >
+    <textarea  matInput formControlName = "content" placeholder="Post"></textarea>
+  </mat-form-field>
+
+  <div>
+    <button mat-raised-button type="submit" color="primary">Post</button>
+  </div>
+</form>

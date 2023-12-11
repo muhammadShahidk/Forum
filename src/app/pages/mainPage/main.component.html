@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container>
   <mat-sidenav
     #drawer
     class="p-3"
@@ -12,48 +12,57 @@
   <mat-sidenav-content>
     <!-- header nav bar -->
     <mat-toolbar color="primary">
-      <!-- header -->
-      @if (isHandset$ | async) {
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      }
-      <img
-        class="h-5/6 mx-3"
-        src="../../../assets/images/ForumIcon.png"
-        alt=""
-      />
-      <span class="block ml- 5">Forum</span>
-
-      <div class="flex items-center justify-between gap-4 flex-1">
-        <!-- logout button -->
-        <button class mat-button class="ml-auto" (click)="logout()">
-          <mat-icon>logout</mat-icon>
-          <span>Logout</span>
+      <mat-toolbar-row>
+        <!-- header -->
+        @if (isHandset$ | async) {
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
-
-        <!-- User name -->
-        <mat-chip [matMenuTriggerFor]="menu">
-          <mat-icon color="class" matChipAvatar>account_circle</mat-icon>
-          {{ user().username }}
-        </mat-chip>
-
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon>settings</mat-icon>
-            <span>Profile Settings</span>
+        }
+        <img
+          class="h-5/6 mx-3"
+          src="../../../assets/images/ForumIcon.png"
+          alt=""
+        />
+        <span class="block ml- 5">Forum</span>
+           <!-- logout button -->
+          <button class mat-button class="ml-auto" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
           </button>
-        </mat-menu>
-      </div>
+
+
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+          <div class="flex items-center justify-between gap-4 flex-1">
+
+
+          <div class="flex items-center gap-2">
+            <mat-icon color="class" matChipAvatar>hdr_strong</mat-icon>
+            {{ getUserRool() }}
+          </div>
+          <!-- User name -->
+          <button class="flex items-center gap-2 text-sm"  [matMenuTriggerFor]="menu">
+            <mat-icon color="class" matChipAvatar>account_circle</mat-icon>
+            {{ user().username }}
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>settings</mat-icon>
+              <span>Profile Settings</span>
+            </button>
+          </mat-menu>
+        </div>
+      </mat-toolbar-row>
     </mat-toolbar>
 
-    <main class="w-11/12 mt-16  sm:w-8/12 m-auto ">
-
+    <main class="w-11/12 mt-16 sm:w-8/12 m-auto">
       <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>

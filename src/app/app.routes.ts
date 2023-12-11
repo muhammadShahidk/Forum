@@ -9,13 +9,9 @@ import { PostListComponent } from './Components/PostComponents/PostList/PostList
 import { PostsComponent } from './Pages/PostsPage/PostsPage.component';
 import { YourPostsComponent } from './Pages/YourPostsPage/YourPostsPage.component';
 import { NewPostPageComponent } from './Pages/NewPostPage/NewPostPage.component';
+import { ApprovalRequestPageComponent } from './Pages/ApprovalRequestPage/ApprovalRequestPage.component';
 
 export const routes: Routes = [
-  {
-    path: 'home',
-    component: AppComponent,
-    canActivate: [authGuardGuard],
-  },
   {
     path: 'login',
     component: LoginComponent,
@@ -45,6 +41,10 @@ export const routes: Routes = [
       {
         path: 'User/NewPost',
         component: NewPostPageComponent,
+      },
+      {
+        path: 'User/ApprovalRequest',
+        component: ApprovalRequestPageComponent,
       },
     ],
   },

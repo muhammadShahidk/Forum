@@ -15,6 +15,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { PostComponent } from '../../Components/PostComponents/Post/Post.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { SideBarComponent } from '../../Components/sideBar/sideBar.component';
+import { USER_ROOLS } from '../../Modals/Enum/USER_ROOLS';
 
 @Component({
   selector: 'app-main',
@@ -40,14 +41,27 @@ export class MainComponent implements OnInit {
   constructor(private router: Router, private authservice: AuthService) {}
   async ngOnInit(): Promise<void> {
     this.user.set(await this.authservice.getUserDetails());
-    console.log(this.user().email)
+    console.log(this.user())
   }
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 
+  getUserRool(): string {
+    const userRools = this.user().rools.map((rool) => {return rool.toLowerCase()} );
+    switch (true) {
+      case userRools.includes(USER_ROOLS.Admin.toLocaleLowerCase()):
+        return USER_ROOLS.Admin;
+      case userRools.includes(USER_ROOLS.Moderator.toLocaleLowerCase()):
+        return USER_ROOLS.Moderator;
+      default:
+        return USER_ROOLS.User;
+    }
+  }
+
   user= signal<UserRequestDto>({firstName:"",lastName:"",username:"",rools:[],email:""}) ;
+
   private breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -57,3 +71,6 @@ export class MainComponent implements OnInit {
       shareReplay()
     );
 }
+
+
+

@@ -28,34 +28,23 @@ export class PostHeaderComponent {
   CreatedOn = computed(() => this.createdOn());
 
   createdOn = () => {
-    if(this.date === undefined){
+    if (!this.date) {
       console.log("date is undefined");
       return '';
-
-    }
-    // console.log(this.date());
-    // console.log("calculating date");
-    if(this.date() === undefined){
-      return '';
-
-    }
-    else{
-      if (this.date()) {
-        const currentDate = new Date();
-        const oldDate = new Date(this.date());
-        const diffInMinutes = Math.floor((currentDate.getTime() - oldDate.getTime()) / (1000 * 60));
-        if (diffInMinutes < 60) {
-          return `${diffInMinutes} minutes ago`;
-        } else if (diffInMinutes < 1440) {
-          const diffInHours = Math.floor(diffInMinutes / 60);
-          return `${diffInHours} hours ago`;
-        } else {
-          const diffInDays = Math.floor(diffInMinutes / 1440);
-          return `${diffInDays} days ago`;
-        }
-      }
     }
 
-    return '';
+    const currentDate = new Date();
+    const oldDate = new Date(this.date());
+
+    const diffInMinutes = Math.floor((currentDate.getTime() - oldDate.getTime()) / (1000 * 60));
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes} minutes ago`;
+    } else if (diffInMinutes < 1440) {
+      const diffInHours = Math.floor(diffInMinutes / 60);
+      return `${diffInHours} hours ago`;
+    } else {
+      const diffInDays = Math.floor(diffInMinutes / 1440);
+      return `${diffInDays} days ago`;
+    }
   }
 }
