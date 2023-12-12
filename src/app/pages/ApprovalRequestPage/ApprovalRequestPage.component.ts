@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
-import { PandingAprovalRequestComponent } from '../../Components/Aproval/PandingAprovalRequest/PandingAprovalRequest.component';
-import { ApprovedAprovalRequestComponent } from '../../Components/Aproval/ApprovedAprovalRequest/ApprovedAprovalRequest.component';
 import { ApprovalService } from '../../Services/Approval.service';
 import {
   ApprovalRequestDto,
@@ -23,6 +21,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { TimeAgoPipe } from '../../Modals/pipes/timeAgo.pipe';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 @Component({
   selector: 'app-approval-request-page',
   standalone: true,
@@ -37,14 +37,14 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatBottomSheetModule,
-    PandingAprovalRequestComponent,
-    ApprovedAprovalRequestComponent,
     TimeAgoPipe,
   ],
 })
-export class ApprovalRequestPageComponent {
-  approvalRequests: ApprovalResponseDto[] = {} as ApprovalResponseDto[];
+export class ApprovalRequestPageComponent implements AfterViewInit {
+  approvalRequests: ApprovalResponseDto[] = [] as ApprovalResponseDto[];
   displayedColumns: string[] = [
     'select',
     'username',
@@ -58,6 +58,12 @@ export class ApprovalRequestPageComponent {
     this.approvalRequests
   );
   selection = new SelectionModel<ApprovalResponseDto>(true, []);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -93,7 +99,12 @@ export class ApprovalRequestPageComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
+
 
   constructor(
     private _bottomSheet: MatBottomSheet,
@@ -101,17 +112,26 @@ export class ApprovalRequestPageComponent {
   ) {}
 
   openBottomSheet(): void {
-    this._bottomSheet.open(AprovalBotomSheetComponent, {
+    const bottomSheetRef = this._bottomSheet.open(AprovalBotomSheetComponent, {
       data: { SelectedRequests: this.selection.selected },
+    });
+
+    bottomSheetRef.afterDismissed().subscribe(() => {
+      this.getApprovalRequest();
+      this.selection.clear();
     });
   }
 
-  async ngOnInit() {
+  async getApprovalRequest() {
     this.approvalRequests = await this.aprovalService.getAllRequest();
     this.dataSource.data = this.approvalRequests.map((x) => ({
       ...x,
       Status: ApprovalStatus[x.status] as string,
     }));
+  }
+
+  async ngOnInit() {
+    await this.getApprovalRequest();
 
     console.log(
       this.approvalRequests.map((x) => ({
