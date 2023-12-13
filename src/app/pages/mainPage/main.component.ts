@@ -60,7 +60,7 @@ export class MainComponent implements OnInit {
     }
   }
 
-  user= signal<UserRequestDto>({firstName:"",lastName:"",username:"",rools:[],email:""}) ;
+  user= signal<UserResponseDto>({email:"",firstName:"",rools:[],lastName:"",  userID:0,username:""}as UserResponseDto) ;
 
   private breakpointObserver = inject(BreakpointObserver);
 

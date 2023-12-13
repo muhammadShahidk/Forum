@@ -10,6 +10,7 @@ import { PostsComponent } from './Pages/PostsPage/PostsPage.component';
 import { YourPostsComponent } from './Pages/YourPostsPage/YourPostsPage.component';
 import { NewPostPageComponent } from './Pages/NewPostPage/NewPostPage.component';
 import { ApprovalRequestPageComponent } from './Pages/ApprovalRequestPage/ApprovalRequestPage.component';
+import { SettingsPageComponent } from './Pages/SettingsPage/SettingsPage.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,11 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'user/settings',
+    component: SettingsPageComponent,
+    canActivate: [authGuardGuard],
   },
   {
     path: 'forum',

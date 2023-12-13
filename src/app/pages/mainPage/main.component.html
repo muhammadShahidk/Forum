@@ -53,16 +53,16 @@
           </button>
 
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <a routerLink="/user/settings"  mat-menu-item>
               <mat-icon>settings</mat-icon>
               <span>Profile Settings</span>
-            </button>
+            </a>
           </mat-menu>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>
 
-    <main class="w-11/12 mt-16 sm:w-8/12 m-auto">
+    <main class="container px-2">
       <router-outlet></router-outlet>
     </main>
   </mat-sidenav-content>

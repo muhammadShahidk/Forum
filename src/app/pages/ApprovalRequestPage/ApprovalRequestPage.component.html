@@ -1,4 +1,4 @@
-<mat-tab-group>
+<mat-tab-group class="mt-10">
   <mat-tab>
     <ng-template mat-tab-label>
       <mat-icon class="example-tab-icon">assignment_turned_in</mat-icon>
@@ -6,7 +6,7 @@
     </ng-template>
 
     <!-- approval options -->
-    <div class="flex items-center gap-3 mt-2">
+    <div class="flex items-center gap-3 mt-10">
       @if (selection.selected.length > 0) {
       <!-- change status -->
       <button
@@ -31,7 +31,7 @@
     </div>
 
     <!-- table for approval request -->
-    <div class="mat-elevation-z8 mt-3">
+    <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select">
@@ -54,6 +54,7 @@
             </mat-checkbox>
           </td>
         </ng-container>
+
         <!-- username Column -->
         <ng-container matColumnDef="username">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Username.</th>
@@ -94,6 +95,7 @@
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr
+          class="cursor-pointer"
           mat-row
           *matRowDef="let row; columns: displayedColumns"
           (click)="selection.toggle(row)"
@@ -109,6 +111,12 @@
       <mat-icon class="example-tab-icon">supervisor_account</mat-icon>
       User Roles Management
     </ng-template>
+
+    <!-- user rools -->
+    <div class="mt-10">
+      <app-user-rools-management />
+    </div>
+
   </mat-tab>
 
   <mat-tab>
@@ -117,5 +125,8 @@
       Sensitive Keywords Management
     </ng-template>
 
+    <div class="mt-10">
+      <app-sensitive-key-word-management />
+    </div>
   </mat-tab>
 </mat-tab-group>

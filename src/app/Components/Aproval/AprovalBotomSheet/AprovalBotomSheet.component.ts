@@ -5,10 +5,18 @@ import {
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
 import { MatListModule } from '@angular/material/list';
-import { ApprovalResponseDto, ChangeApprovalStatusDto } from '../../../Modals/Dtos/ApprovalDto';
+import {
+  ApprovalResponseDto,
+  ChangeApprovalStatusDto,
+} from '../../../Modals/Dtos/ApprovalDto';
 import { MatButtonModule } from '@angular/material/button';
 import { ApprovalService } from '../../../Services/Approval.service';
 import { ApprovalStatus } from '../../../Modals/Enum/STATUS';
+import { AuthService } from '../../../Services/Auth.service';
+import {
+  UseRooleRequestDto,
+  UserRolResponceDto,
+} from '../../../Modals/Dtos/userDto';
 
 @Component({
   selector: 'app-aproval-botom-sheet',
@@ -18,16 +26,33 @@ import { ApprovalStatus } from '../../../Modals/Enum/STATUS';
   styleUrl: './AprovalBotomSheet.component.css',
 })
 export class AprovalBotomSheetComponent {
-  SelectedRequests: ApprovalResponseDto[];
-  typesOfShoes: string[] = ['Approved', 'Rejected', 'Pending'];
+  SelectedRequests: ApprovalResponseDto[] = [] as ApprovalResponseDto[];
+  usrRoolsRequest: UseRooleRequestDto[] = [] as UseRooleRequestDto[];
+  private _typesOfShoes: string[] = ['Approved', 'Rejected', 'Pending'];
+  public get typesOfShoes(): string[] {
+    if (this.type == 'userRools') {
+      return ['User', 'Moderator'];
+    }
+    return this._typesOfShoes;
+  }
+  public set typesOfShoes(value: string[]) {
+    this._typesOfShoes = value;
+  }
+  type: string;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA)
-    public data: { SelectedRequests: ApprovalResponseDto[] },
+    public data: { SelectedRequests: unknown; type: string },
     private _bottomSheetRef: MatBottomSheetRef<AprovalBotomSheetComponent>,
-    private approvalService: ApprovalService
+    private approvalService: ApprovalService,
+    private authService: AuthService
   ) {
-    this.SelectedRequests = data.SelectedRequests;
+    this.type = data.type;
+    if (this.type == 'userRools') {
+      this.usrRoolsRequest = data.SelectedRequests as UserRolResponceDto[];
+    } else {
+      this.SelectedRequests = data.SelectedRequests as ApprovalResponseDto[];
+    }
   }
 
   async changeStatus(status: ChangeApprovalStatusDto) {
@@ -47,7 +72,26 @@ export class AprovalBotomSheetComponent {
     }
   }
 
+  async makeModerator(Username: string) {
+    await this.authService.makeModerator({ userName: Username });
+  }
+
   UpdateStatus(_status: string): void {
+    if (this.type === 'userRools') {
+      if (_status === 'Moderator') {
+        this.usrRoolsRequest.forEach(async (Request) => {
+          await this.makeModerator(Request.userName);
+        });
+      } else {
+        this.usrRoolsRequest.forEach(async (Request) => {
+          await this.makeUser({ userName: Request.userName });
+        });
+      }
+      console.log('user rools changed');
+      this._bottomSheetRef.dismiss();
+
+      return;
+    }
     this.SelectedRequests.forEach(async (Request) => {
       const status = {} as ChangeApprovalStatusDto;
       status.requestId = Request.requestId;
@@ -57,5 +101,8 @@ export class AprovalBotomSheetComponent {
       console.log('status changed of ' + Request.username + ' to ' + _status);
     });
     this._bottomSheetRef.dismiss();
+  }
+  async makeUser(User: UseRooleRequestDto) {
+    await this.authService.makeUser(User);
   }
 }

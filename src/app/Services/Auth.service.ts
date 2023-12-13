@@ -1,12 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { PATH_AUTH, RouteCategories, _basePath } from '../routes/paths';
+import { Auth, RouteCategories, _basePath } from '../routes/paths';
 import { UserRegisterDto } from '../Modals/Dtos/UserRegisterDto';
 import { UserLoginDto } from '../Modals/Dtos/UserLoginDto';
 import { Observable, firstValueFrom } from 'rxjs';
-import { UserRequestDto, UserResponseDto } from '../Modals/Dtos/userDto';
+import {
+  UseRooleRequestDto,
+  UserRequestDto,
+  UserResponseDto,
+  UserRolResponceDto,
+} from '../Modals/Dtos/userDto';
 import { ApiRequestService } from './ApiRequest.service';
-import { ApprovalRequestDto, ApprovalResponseDto } from '../Modals/Dtos/ApprovalDto';
+import {
+  ApprovalRequestDto,
+  ApprovalResponseDto,
+} from '../Modals/Dtos/ApprovalDto';
 import { ApiResponceDto, apiResponce } from '../Modals/Dtos/ApiResponceDto';
 
 @Injectable({
@@ -15,13 +23,11 @@ import { ApiResponceDto, apiResponce } from '../Modals/Dtos/ApiResponceDto';
 export class AuthService {
   Token: string = '';
 
-  constructor(private http: HttpClient,private api:ApiRequestService) {}
+  constructor(private http: HttpClient, private api: ApiRequestService) {}
 
   storeToken(token: string): void {
-
     console.log('token', token);
     localStorage.setItem('token', token);
-
   }
 
   // create a method to get the token from local storage
@@ -29,12 +35,10 @@ export class AuthService {
     return localStorage.getItem('token') || '';
   }
 
-
-
   // register method
   async Register(user: UserRegisterDto): Promise<any> {
     return this.api.handleRequest<any>(
-      this.http.post(`${_basePath}/${PATH_AUTH.register}`, user)
+      this.http.post(`${RouteCategories.Auth.Register()}`, user)
     );
   }
 
@@ -43,14 +47,14 @@ export class AuthService {
     try {
       const response = await this.api.handleRequest<apiResponce<loginResponse>>(
         this.http.post<apiResponce<loginResponse>>(
-          `${_basePath}/${PATH_AUTH.login}`,
+          `${RouteCategories.Auth.Login()}`,
           user
         )
       );
 
       console.log(response.Success);
       if (response.Success) {
-        console.log("setting the token");
+        console.log('setting the token');
         this.storeToken(response.Data.message);
       } else {
         console.log(response.Data.message);
@@ -77,9 +81,14 @@ export class AuthService {
   }
 
   // make approval request
-  async MakeApprovalRequest(request:ApprovalRequestDto): Promise<ApprovalResponseDto> {
+  async MakeApprovalRequest(
+    request: ApprovalRequestDto
+  ): Promise<ApprovalResponseDto> {
     return this.api.handleRequest(
-      this.http.post<ApprovalResponseDto>(RouteCategories.ApprovalRequests.POST(), request)
+      this.http.post<ApprovalResponseDto>(
+        RouteCategories.ApprovalRequests.POST(),
+        request
+      )
     );
   }
 
@@ -98,12 +107,56 @@ export class AuthService {
     }
   }
 
+  //get all user roles
+  async getAllUsersWithRoles(): Promise<UserRolResponceDto[]> {
+    try {
+      const response = await this.api.handleRequest(
+        this.http.post<apiResponce<UserRolResponceDto[]>>(
+          `${RouteCategories.Auth.AllUsersWithRools()}`,
+          {}
+        )
+      );
+      return response.Data;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`${(error as any).error}`);
+    }
+  }
 
+  //make user moderator
+  async makeModerator(user: UseRooleRequestDto): Promise<any> {
+    try {
+      const response = await this.api.handleRequest(
+        this.http.post<apiResponce<any>>(
+          `${RouteCategories.Auth.MakeModerator()}`,
+          user
+        )
+      );
+      return response.Data;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`${(error as any).error}`);
+    }
+  }
+  // make user
+  async makeUser(user: UseRooleRequestDto): Promise<any> {
+    try {
+      const response = await this.api.handleRequest(
+        this.http.post<apiResponce<any>>(
+          `${RouteCategories.Auth.MakeUser()}`,
+           user 
+        )
+      );
+      return response.Data;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`${(error as any).error}`);
+    }
+  }
 }
 
 
-
 interface loginResponse {
-  isSucceed:boolean;
-  message:string;
+  isSucceed: boolean;
+  message: string;
 }

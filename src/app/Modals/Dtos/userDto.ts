@@ -2,10 +2,21 @@ export interface UserRequestDto {
   email: string;
   firstName: string;
   lastName: string;
-  rools: string[];
   username: string;
 }
 
 export interface UserResponseDto extends UserRequestDto {
   userID: number;
+  rools: string[];
+}
+
+export interface UserRolResponceDto {
+  name: string;
+  userName: string;
+  password: string;
+  rools: string[];
+}
+
+export interface UseRooleRequestDto {
+  userName: string;
 }

@@ -2,7 +2,7 @@
 // export const _basePath = 'https://localhost:44376/api';
 export const _basePath = 'https://localhost:44344/api';
 
-export const PATH_AUTH = {
+export const Auth = {
   login: 'Auth/login',
   register: 'Auth/register',
   allUsersWithRools: 'Auth/get-user-rols',
@@ -23,9 +23,11 @@ export const RouteCategories = {
       PUT: (id: string) => appendBasePath(`User/posts/${id}`),
       DELETE: (id: string) => appendBasePath(`Posts/${id}`),
       Comments: {
-        GET: (postId: number) => appendBasePath(`User/posts/${postId}/comments`),
+        GET: (postId: number) =>
+          appendBasePath(`User/posts/${postId}/comments`),
         GETAll: () => appendBasePath('User/comments'),
-        POST: (postId: number) => appendBasePath(`User/posts/${postId}/comments`),
+        POST: (postId: number) =>
+          appendBasePath(`User/posts/${postId}/comments`),
         DELETE: (postId: number, commentId: number) =>
           appendBasePath(`Posts/${postId}/comments/${commentId}`),
         PUT: (id: string) => appendBasePath(`User/comments/${id}`),
@@ -43,12 +45,26 @@ export const RouteCategories = {
     GET_All: () => appendBasePath('Posts'), // Route for getting all posts (not user-specific)
     GET: (postId: number) => appendBasePath(`Posts/${postId}`), // Route for getting all posts (not user-specific)
     DELETE: (postId: number) => appendBasePath(`Posts/${postId}`), // Route for getting all posts (not user-specific)
-    GET_Comments: (postId: number) => appendBasePath(`Posts/${postId}/comments`), // Route for getting all posts (not user-specific)
+    GET_Comments: (postId: number) =>
+      appendBasePath(`Posts/${postId}/comments`), // Route for getting all posts (not user-specific)
   },
   ApprovalRequests: {
     POST: () => appendBasePath('User/approval-request'),
     PUT: () => appendBasePath('User/approval-Request'),
     GET_ALL: () => appendBasePath('User/approval-request'),
+  },
+  Auth: {
+    Login: () => appendBasePath('Auth/login'),
+    Register: () => appendBasePath('Auth/register'),
+    AllUsersWithRools: () => appendBasePath('Auth/get-user-rols'),
+    MakeModerator: () => appendBasePath('Auth/make-moderator'),
+    MakeUser: () => appendBasePath('Auth/make-user'),
+  },
+  SensitiveKeywords: {
+    GET_ALL: () => appendBasePath('User/sensitivekeyword'),
+    POST: () => appendBasePath('User/sensitivekeyword'),
+    DELETE: (id: number) => appendBasePath(`User/sensitivekeyword/${id}`),
+    PUT: (id: number) => appendBasePath(`User/sensitivekeyword/${id}`),
   },
 };
 

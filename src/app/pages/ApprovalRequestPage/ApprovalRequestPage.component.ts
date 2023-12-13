@@ -23,6 +23,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { UserRoolsManagementComponent } from '../../Components/Admin/UserRoolsManagement/UserRoolsManagement.component';
+import { SensitiveKeyWordManagementComponent } from '../../Components/Admin/SensitiveKeyWordManagement/SensitiveKeyWordManagement.component';
 @Component({
   selector: 'app-approval-request-page',
   standalone: true,
@@ -32,6 +34,8 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
     CommonModule,
     MatFormFieldModule,
     MatTabsModule,
+    UserRoolsManagementComponent,
+    SensitiveKeyWordManagementComponent,
     MatCheckboxModule,
     MatTableModule,
     MatIconModule,
@@ -61,6 +65,7 @@ export class ApprovalRequestPageComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   ngAfterViewInit() {
+    console.log("approval request page after view init")
     this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
   }
@@ -131,6 +136,7 @@ export class ApprovalRequestPageComponent implements AfterViewInit {
   }
 
   async ngOnInit() {
+    console.log("approval request page on  init")
     await this.getApprovalRequest();
 
     console.log(
@@ -142,4 +148,6 @@ export class ApprovalRequestPageComponent implements AfterViewInit {
       }))
     );
   }
+
+  
 }
