@@ -19,7 +19,7 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
     MatButtonModule,
     MatCardModule,
     ReactiveFormsModule,
-    LoginRegisterNavComponent
+    LoginRegisterNavComponent,
   ],
 })
 export class RegisterComponent {
@@ -38,18 +38,27 @@ export class RegisterComponent {
     if (this.addressForm.valid) {
       const form = this.addressForm.value;
       const { username, password, firstName, email, lastName } = form;
-      
-      console.log(form);
-      await this._authService.Register({
-        userName: username ?? "",
-        password: password ?? "",
-        firstName: firstName ?? "",
-        email: email ?? "",
-        lastName: lastName ?? "",
-      });
 
-      await this._authService.MakeApprovalRequest({username:username ?? ""})
-      console.info('your approval request has been sent to admin please wait for approval');
+      console.log(form);
+      try {
+        await this._authService.Register({
+          userName: username ?? '',
+          password: password ?? '',
+          firstName: firstName ?? '',
+          email: email ?? '',
+          lastName: lastName ?? '',
+        });
+
+        await this._authService.MakeApprovalRequest({
+          username: username ?? '',
+        });
+        console.info(
+          'your approval request has been sent to admin please wait for approval'
+        );
+        this._router.navigate(['/login']);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 }

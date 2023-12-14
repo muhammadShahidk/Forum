@@ -33,11 +33,8 @@ import { MessageArchivedComponentComponent } from './Components/MessageArchivedC
     LoginRegisterNavComponent,
   ],
 })
-export class AppComponent implements OnDestroy {
-  ngOnDestroy(): void {
-    console.log('app component destroyed');
-    localStorage.removeItem('token');
-  }
+export class AppComponent   {
+
   // UpdateNumber() {
   //   this.number.update((value) => value + 1);
   //   this.mystate.set(this.number() + 2);
@@ -48,7 +45,7 @@ export class AppComponent implements OnDestroy {
     if (this.toast.isOpen() == true) {
      this. _snackBar.openFromComponent(MessageArchivedComponentComponent, {
         data: 'some data',
-   
+
       });
       // this.toast.isOpen.set(false);
       return true;
@@ -60,6 +57,7 @@ export class AppComponent implements OnDestroy {
   number = signal(this.toast.isOpen);
 
   constructor(private toast: ToastService, private _snackBar: MatSnackBar) {
+   
   }
 
   openSnackBar(message: string, action: string) {

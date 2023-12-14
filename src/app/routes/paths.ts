@@ -32,13 +32,6 @@ export const RouteCategories = {
           appendBasePath(`Posts/${postId}/comments/${commentId}`),
         PUT: (id: string) => appendBasePath(`User/comments/${id}`),
       },
-      UpdatePassword: {
-        PUT: () => appendBasePath('User/password'),
-      },
-      ForgotPassword: {
-        GET: () => appendBasePath('User/forgot-password'),
-        PUT: () => appendBasePath('User/forgot-password'),
-      },
     },
   },
   Posts: {
@@ -65,6 +58,18 @@ export const RouteCategories = {
     POST: () => appendBasePath('User/sensitivekeyword'),
     DELETE: (id: number) => appendBasePath(`User/sensitivekeyword/${id}`),
     PUT: (id: number) => appendBasePath(`User/sensitivekeyword/${id}`),
+  },
+  Profile: {
+    PUT: () => appendBasePath('Profile/user'),
+    password: {
+      UpdatePassword: {
+        PUT: () => appendBasePath('User/password'),
+      },
+      ForgotPassword: {
+        GET: () => appendBasePath('User/forgot-password'),
+        PUT: () => appendBasePath('User/forgot-password'),
+      },
+    },
   },
 };
 

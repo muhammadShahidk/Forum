@@ -20,3 +20,10 @@ export interface UserRolResponceDto {
 export interface UseRooleRequestDto {
   userName: string;
 }
+
+export  interface UpdateUserInfoDto
+{
+  firstName: string,
+  lastName: string,
+  email: string
+}

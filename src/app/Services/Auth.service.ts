@@ -16,6 +16,7 @@ import {
   ApprovalResponseDto,
 } from '../Modals/Dtos/ApprovalDto';
 import { ApiResponceDto, apiResponce } from '../Modals/Dtos/ApiResponceDto';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -23,11 +24,18 @@ import { ApiResponceDto, apiResponce } from '../Modals/Dtos/ApiResponceDto';
 export class AuthService {
   Token: string = '';
 
-  constructor(private http: HttpClient, private api: ApiRequestService) {}
+  constructor(private router:Router,private http: HttpClient, private api: ApiRequestService) {}
 
   storeToken(token: string): void {
     console.log('token', token);
     localStorage.setItem('token', token);
+
+    // remove token after 40 min
+    setTimeout(() => {
+       localStorage.removeItem('token');
+        this.router.navigate(['/login']);
+
+     }, 2400000);
   }
 
   // create a method to get the token from local storage
@@ -144,7 +152,7 @@ export class AuthService {
       const response = await this.api.handleRequest(
         this.http.post<apiResponce<any>>(
           `${RouteCategories.Auth.MakeUser()}`,
-           user 
+           user
         )
       );
       return response.Data;

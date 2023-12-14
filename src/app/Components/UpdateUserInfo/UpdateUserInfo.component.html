@@ -1,0 +1,33 @@
+<div class="example-container">
+  <form [formGroup]="UserDetails">
+    <mat-form-field class="w-full">
+      <input matInput placeholder="Email" formControlName="Email" required />
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        placeholder="First Name"
+        formControlName="FirstName"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        placeholder="Last Name"
+        formControlName="lastName"
+        required
+      />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="updateUserInfo()">
+      <span class="flex items-center gap-2">
+        @if (isSpinner()) {
+        <mat-spinner [diameter]="20" color="accent"></mat-spinner>
+        Update }@else { Update }
+      </span>
+    </button>
+  </form>
+</div>
