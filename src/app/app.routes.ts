@@ -12,6 +12,7 @@ import { NewPostPageComponent } from './Pages/NewPostPage/NewPostPage.component'
 import { ApprovalRequestPageComponent } from './Pages/ApprovalRequestPage/ApprovalRequestPage.component';
 import { SettingsPageComponent } from './Pages/SettingsPage/SettingsPage.component';
 import { FourOFourPageComponent } from './Pages/FourOFourPage/FourOFourPage.component';
+import { PasswordResetPageComponent } from './Pages/PasswordResetPage/PasswordResetPage.component';
 
 export const routes: Routes = [
   {
@@ -59,12 +60,17 @@ export const routes: Routes = [
       },
     ],
   },
+  // create password-reaset route with userid and token
+  {
+    path: 'reset-password',
+    component: PasswordResetPageComponent,
+  },
 
   // create 404 page
+
+  { path: '', redirectTo: '/forum/posts', pathMatch: 'full' },
   {
     path: '**',
     redirectTo: '/forum/notFound',
   },
-
-  { path: '', redirectTo: '/forum/posts', pathMatch: 'full' },
 ];
