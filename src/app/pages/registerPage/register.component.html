@@ -1,7 +1,9 @@
 <!-- nav -->
-<app-login-register-nav/>
+<app-login-register-nav />
 
-<div class="m-auto mt-5 flex flex-col sm:flex-row p-2 bg-[#f3f0f7] sm:p-5 md:w-4/6">
+<div
+  class="m-auto mt-5 flex flex-col sm:flex-row p-2 bg-[#f3f0f7] sm:p-5 md:w-4/6"
+>
   <div>
     <h1 class="text-4xl font-extrabold mb-4">Join Community</h1>
     <p class="text-sm">
@@ -25,6 +27,13 @@
                 @if (addressForm.controls['firstName'].hasError('required')) {
                 <mat-error>First name is <strong>required</strong></mat-error>
                 }
+                <!-- hand minlength error -->
+                @if (addressForm.controls['firstName'].hasError('minlength')) {
+                <mat-error
+                  >First name must be at least
+                  <strong>3 characters</strong></mat-error
+                >
+                }
               </mat-form-field>
             </div>
             <!-- last name -->
@@ -37,6 +46,12 @@
                 />
                 @if (addressForm.controls['lastName'].hasError('required')) {
                 <mat-error>Last name is <strong>required</strong></mat-error>
+                }
+                @if (addressForm.controls['lastName'].hasError('minlength')) {
+                <mat-error
+                  >First name must be at least
+                  <strong>3 characters</strong></mat-error
+                >
                 }
               </mat-form-field>
             </div>
@@ -67,6 +82,11 @@
             @if (addressForm.controls['email'].hasError('required')) {
             <mat-error>Email is <strong>required</strong></mat-error>
             }
+            <!-- handel email error -->
+            @if (addressForm.controls['email'].hasError('email')) {
+            <mat-error>Enter a valid email address</mat-error>
+            }
+            
           </mat-form-field>
 
           <!-- password -->

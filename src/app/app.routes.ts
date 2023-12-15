@@ -11,6 +11,7 @@ import { YourPostsComponent } from './Pages/YourPostsPage/YourPostsPage.componen
 import { NewPostPageComponent } from './Pages/NewPostPage/NewPostPage.component';
 import { ApprovalRequestPageComponent } from './Pages/ApprovalRequestPage/ApprovalRequestPage.component';
 import { SettingsPageComponent } from './Pages/SettingsPage/SettingsPage.component';
+import { FourOFourPageComponent } from './Pages/FourOFourPage/FourOFourPage.component';
 
 export const routes: Routes = [
   {
@@ -52,7 +53,17 @@ export const routes: Routes = [
         path: 'User/ApprovalRequest',
         component: ApprovalRequestPageComponent,
       },
+      {
+        path: 'notFound',
+        component: FourOFourPageComponent,
+      },
     ],
+  },
+
+  // create 404 page
+  {
+    path: '**',
+    redirectTo: '/forum/notFound',
   },
 
   { path: '', redirectTo: '/forum/posts', pathMatch: 'full' },

@@ -25,11 +25,11 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
 export class RegisterComponent {
   private fb = inject(FormBuilder);
   addressForm = this.fb.group({
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    username: [null, Validators.required],
-    password: [null, Validators.required],
-    email: [null, Validators.required],
+    firstName: [null, [Validators.required, Validators.minLength(3)]],
+    lastName: [null, [Validators.required, Validators.minLength(3)]],
+    username: [null, [Validators.required]],
+    password: [null, [Validators.required, Validators.minLength(4)]],
+    email: [null, [Validators.required,Validators.email]],
   });
 
   constructor(private _router: Router, private _authService: AuthService) {}
