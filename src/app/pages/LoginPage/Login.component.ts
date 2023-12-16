@@ -84,9 +84,15 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
               (click)="onSubmit()"
               type="submit"
               class="w-full"
+              [disabled]="!loginForm.valid"
             >
               login
             </button>
+
+            <!-- forgot password button -->
+            <a mat-button routerLink="/forgot-password" class="w-full">
+              forgot password?
+            </a>
           </mat-card-actions>
         </mat-card>
 
@@ -122,11 +128,10 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
 export class LoginComponent {
   private fb = inject(FormBuilder);
   loginForm = this.fb.group({
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
+
     username: [null, Validators.required],
     password: [null, Validators.required],
-    email: [null, Validators.required],
+
   });
 
   ErrorMessage = signal(''); //) ;
@@ -141,7 +146,7 @@ export class LoginComponent {
       };
 
       const user = await this.authService.Login(userLoginDto);
-      
+
       // Do something with the user object
       console.log('login response');
       console.log(user);

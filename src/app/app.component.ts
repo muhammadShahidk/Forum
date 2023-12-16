@@ -57,7 +57,8 @@ export class AppComponent   {
   number = signal(this.toast.isOpen);
 
   constructor(private toast: ToastService, private _snackBar: MatSnackBar) {
-   
+
+
   }
 
   openSnackBar(message: string, action: string) {

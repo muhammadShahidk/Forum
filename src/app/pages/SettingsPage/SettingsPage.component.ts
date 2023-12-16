@@ -9,6 +9,8 @@ import { UserResponseDto } from '../../Modals/Dtos/userDto';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AlertBoxComponent } from '../../Components/AlertBox/AlertBox.component';
 
 @Component({
   selector: 'app-settings-page',
@@ -21,13 +23,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatDividerModule,
     MatChipsModule,
     MatIconModule,
+
   ],
   templateUrl: './SettingsPage.component.html',
   styleUrl: './SettingsPage.component.css',
 })
 export class SettingsPageComponent implements OnInit {
   OnUserUpdate() {
-    alert('User Updated');
   }
   user = signal<UserResponseDto>({
     email: '',
@@ -37,6 +39,7 @@ export class SettingsPageComponent implements OnInit {
     userID: 0,
     username: '',
   } as UserResponseDto);
+
 
   constructor(private router: Router, private authservice: AuthService) {}
   async ngOnInit(): Promise<void> {
