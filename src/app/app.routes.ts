@@ -13,6 +13,7 @@ import { ApprovalRequestPageComponent } from './Pages/ApprovalRequestPage/Approv
 import { SettingsPageComponent } from './Pages/SettingsPage/SettingsPage.component';
 import { FourOFourPageComponent } from './Pages/FourOFourPage/FourOFourPage.component';
 import { PasswordResetPageComponent } from './Pages/PasswordResetPage/PasswordResetPage.component';
+import { ForgotPassowrdPageComponent } from './Pages/forgotPassowrdPage/forgotPassowrdPage.component';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,11 @@ export const routes: Routes = [
   {
     path: 'reset-password',
     component: PasswordResetPageComponent,
+  },
+  // forgot password route
+  {
+    path: 'forgot-password',
+    component: ForgotPassowrdPageComponent,
   },
 
   // create 404 page
