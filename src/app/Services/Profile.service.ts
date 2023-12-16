@@ -3,7 +3,11 @@ import { Injectable } from '@angular/core';
 import { ApiRequestService } from './ApiRequest.service';
 import { UpdateUserInfoDto } from '../Modals/Dtos/userDto';
 import { RouteCategories } from '../routes/paths';
-import { ChangePasswordDto } from '../Modals/Dtos/PasswordDto';
+import {
+  ChangePasswordDto,
+  forgotPasswordRequestDto,
+  forgotPasswordUpdateDto,
+} from '../Modals/Dtos/PasswordDto';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +21,31 @@ export class ProfileService {
       )
     );
   }
+
+  // forgot password method
+  async ForgotPasswordRequest(
+    ForgotPasswordRequest: forgotPasswordRequestDto
+  ): Promise<any> {
+    return this.api.handleRequest<any>(
+      this.http.post(
+        `${RouteCategories.Profile.password.ForgotPassword.GET()}`,
+        ForgotPasswordRequest
+      )
+    );
+  }
+
+  // forgot password update method
+  async ForgotPasswordUpdate(
+    ForgotPasswordUpdate: forgotPasswordUpdateDto
+  ): Promise<any> {
+    return this.api.handleRequest<any>(
+      this.http.put(
+        `${RouteCategories.Profile.password.ForgotPassword.PUT()}`,
+        ForgotPasswordUpdate
+      )
+    );
+  }
+
   async UpdateUserInfo(user: UpdateUserInfoDto): Promise<any> {
     return this.api.handleRequest<any>(
       this.http.put(`${RouteCategories.Profile.PUT()}`, user)

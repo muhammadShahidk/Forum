@@ -63,11 +63,11 @@ export const RouteCategories = {
     PUT: () => appendBasePath('Profile/user'),
     password: {
       UpdatePassword: {
-        PUT: () => appendBasePath('User/password'),
+        PUT: () => appendBasePath('Profile/password'),
       },
       ForgotPassword: {
-        GET: () => appendBasePath('User/forgot-password'),
-        PUT: () => appendBasePath('User/forgot-password'),
+        GET: () => appendBasePath('Profile/forgot-password'),
+        PUT: () => appendBasePath('Profile/forgot-password'),
       },
     },
   },
