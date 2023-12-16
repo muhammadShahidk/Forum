@@ -11,6 +11,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { ProfileService } from '../../Services/Profile.service';
 import { ChangePasswordDto } from '../../Modals/Dtos/PasswordDto';
+import { AlertBoxComponent } from '../AlertBox/AlertBox.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-update-passwords',
@@ -27,13 +29,15 @@ import { ChangePasswordDto } from '../../Modals/Dtos/PasswordDto';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    AlertBoxComponent,
+    RouterLink
   ],
   templateUrl: './UpdatePasswords.component.html',
   styleUrl: './UpdatePasswords.component.css',
 })
 export class UpdatePasswordsComponent {
   isSpinner = signal(false);
-
+  isComplete = signal(false);
   async UpdatePassword() {
     const { OldPassword, NewPassword } = this.PasswordChange.value;
     const passwordDetails:ChangePasswordDto = {
@@ -41,7 +45,19 @@ export class UpdatePasswordsComponent {
       newPassword: NewPassword??"",
     }
 
-    await this.profile.ChangePassword(passwordDetails);
+      try
+      {
+        await this.profile.ChangePassword(passwordDetails);
+        this.isComplete.set(true);
+      }
+      catch(e)
+      {
+        console.log(e);
+      }
+      finally
+      {
+        this.isSpinner.set(false);
+      }
 
   }
 

@@ -30,4 +30,8 @@
       </span>
     </button>
   </form>
+
+  @if (isComplete()) {
+    <app-alert-box heading="Update User Info" message="User Info Updated"></app-alert-box>
+  }
 </div>

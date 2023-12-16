@@ -28,6 +28,8 @@ import { UpdateUserInfoDto, UserResponseDto } from '../../Modals/Dtos/userDto';
 import { MatButtonModule } from '@angular/material/button';
 import { ProfileService } from '../../Services/Profile.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AlertBoxComponent } from '../AlertBox/AlertBox.component';
 @Component({
   selector: 'app-update-user-info',
   standalone: true,
@@ -43,15 +45,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    AlertBoxComponent,
   ],
   templateUrl: './UpdateUserInfo.component.html',
   styleUrl: './UpdateUserInfo.component.css',
 })
 export class UpdateUserInfoComponent implements OnChanges {
-  isSpinner = signal( false);
+  isSpinner = signal(false);
+  isComplete = signal(false);
 
   async updateUserInfo() {
-
     console.log('updateUserInfo');
     console.log(this.UserDetails.value);
     if (this.UserDetails.value) {
@@ -69,6 +72,7 @@ export class UpdateUserInfoComponent implements OnChanges {
         await this.profile.UpdateUserInfo(updateUserInfo);
         this.OnUserUpdate.emit();
         this.isSpinner.set(false);
+        this.isComplete.set(true);
       } catch (e) {
         alert(e);
         this.isSpinner.set(false);
