@@ -25,6 +25,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { UserRoolsManagementComponent } from '../../Components/Admin/UserRoolsManagement/UserRoolsManagement.component';
 import { SensitiveKeyWordManagementComponent } from '../../Components/Admin/SensitiveKeyWordManagement/SensitiveKeyWordManagement.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-approval-request-page',
   standalone: true,
@@ -45,6 +47,8 @@ import { SensitiveKeyWordManagementComponent } from '../../Components/Admin/Sens
     MatSortModule,
     MatBottomSheetModule,
     TimeAgoPipe,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
 })
 export class ApprovalRequestPageComponent implements AfterViewInit {
@@ -149,5 +153,5 @@ export class ApprovalRequestPageComponent implements AfterViewInit {
     );
   }
 
-  
+
 }

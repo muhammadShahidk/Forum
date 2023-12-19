@@ -114,9 +114,16 @@
 
     <!-- user rools -->
     <div class="mt-10">
-      <app-user-rools-management />
-    </div>
+      @defer (on viewport) {
 
+      <app-user-rools-management />
+      }@placeholder () {
+      <div class="flex justify-center">
+        <mat-spinner [diameter]="50" [strokeWidth]="5"></mat-spinner>
+        fatching data
+      </div>
+      }
+    </div>
   </mat-tab>
 
   <mat-tab>
@@ -126,7 +133,16 @@
     </ng-template>
 
     <div class="mt-10">
+      @defer (on viewport) {
+
       <app-sensitive-key-word-management />
+      }@placeholder {
+      <div class="flex justify-center">
+        <mat-spinner [diameter]="50" [strokeWidth]="5"></mat-spinner>
+        fatching data
+      </div>
+       }
+
     </div>
   </mat-tab>
 </mat-tab-group>
