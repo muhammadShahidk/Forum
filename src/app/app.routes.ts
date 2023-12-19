@@ -14,6 +14,7 @@ import { SettingsPageComponent } from './Pages/SettingsPage/SettingsPage.compone
 import { FourOFourPageComponent } from './Pages/FourOFourPage/FourOFourPage.component';
 import { PasswordResetPageComponent } from './Pages/PasswordResetPage/PasswordResetPage.component';
 import { ForgotPassowrdPageComponent } from './Pages/forgotPassowrdPage/forgotPassowrdPage.component';
+import { BanUserPageComponent } from './Pages/banUserPage/banUserPage.component';
 
 export const routes: Routes = [
   {
@@ -54,6 +55,10 @@ export const routes: Routes = [
       {
         path: 'User/ApprovalRequest',
         component: ApprovalRequestPageComponent,
+      },
+      {
+        path: 'banuser',
+        component: BanUserPageComponent,
       },
       {
         path: 'notFound',
