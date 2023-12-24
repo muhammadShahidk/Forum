@@ -33,8 +33,7 @@ import { MessageArchivedComponentComponent } from './Components/MessageArchivedC
     LoginRegisterNavComponent,
   ],
 })
-export class AppComponent   {
-
+export class AppComponent {
   // UpdateNumber() {
   //   this.number.update((value) => value + 1);
   //   this.mystate.set(this.number() + 2);
@@ -43,10 +42,22 @@ export class AppComponent   {
   mystate = signal(0);
   toastStatus = computed(() => {
     if (this.toast.isOpen() == true) {
-     this. _snackBar.openFromComponent(MessageArchivedComponentComponent, {
-        data: 'some data',
+      
+      const snackBarRef = this._snackBar.openFromComponent(
+        MessageArchivedComponentComponent,
+        {
+          data: 'some data',
+          duration: 2000,
+        }
+      );
 
+      // after allert collesed
+      snackBarRef.afterDismissed().subscribe(() => {
+    
+        // alert("dismmesed")
+        this.toast.isOpen.set(false);
       });
+
       // this.toast.isOpen.set(false);
       return true;
     } else {
@@ -56,10 +67,7 @@ export class AppComponent   {
 
   number = signal(this.toast.isOpen);
 
-  constructor(private toast: ToastService, private _snackBar: MatSnackBar) {
-
-
-  }
+  constructor(private toast: ToastService, private _snackBar: MatSnackBar) {}
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
