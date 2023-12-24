@@ -14,6 +14,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/Auth.service';
 import { UserLoginDto } from '../../Modals/Dtos/UserLoginDto';
 import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/LoginRegisterNav.component';
+import { InputComponent } from '../../Components/Input/Input.component';
 
 // import
 
@@ -73,6 +74,8 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
                 <mat-error>Password is <strong>required</strong></mat-error>
                 }
               </mat-form-field>
+
+              <app-input/>
             </form>
           </mat-card-content>
 
@@ -121,6 +124,7 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
     ReactiveFormsModule,
     MatInputModule,
     RouterLink,
+    InputComponent,
     LoginRegisterNavComponent
   ],
 })
