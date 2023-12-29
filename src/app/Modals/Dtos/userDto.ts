@@ -27,3 +27,10 @@ export  interface UpdateUserInfoDto
   lastName: string,
   email: string
 }
+
+
+export interface bandUserStatusResponceDto {
+  userId: string;
+  userName: string;
+  status: number;
+}

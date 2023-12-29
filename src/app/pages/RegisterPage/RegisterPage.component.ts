@@ -11,8 +11,8 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  templateUrl: './RegisterPage.component.html',
+  styleUrls: ['./RegisterPage.component.css'],
   standalone: true,
   imports: [
     MatInputModule,
@@ -22,7 +22,7 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
     LoginRegisterNavComponent,
   ],
 })
-export class RegisterComponent {
+export class RegisterPageComponent {
   private fb = inject(FormBuilder);
   addressForm = this.fb.group({
     firstName: [null, [Validators.required, Validators.minLength(3)]],

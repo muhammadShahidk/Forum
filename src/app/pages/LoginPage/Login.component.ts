@@ -14,7 +14,7 @@ import { AuthService } from '../../Services/Auth.service';
 import { UserLoginDto } from '../../Modals/Dtos/UserLoginDto';
 import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/LoginRegisterNav.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { RegisterComponent } from '../registerPage/register.component';
+import { RegisterPageComponent } from '../RegisterPage/RegisterPage.component';
 
 // import
 
@@ -124,7 +124,7 @@ import { RegisterComponent } from '../registerPage/register.component';
   imports: [
     CommonModule,
     MatButtonModule,
-    RegisterComponent,
+    RegisterPageComponent,
     MatCardModule,
     ReactiveFormsModule,
     MatInputModule,

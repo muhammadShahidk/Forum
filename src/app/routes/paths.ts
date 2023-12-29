@@ -17,6 +17,7 @@ const appendBasePath = (route: string) => {
 export const RouteCategories = {
   User: {
     GET: () => appendBasePath('User'),
+    GET_All: () => appendBasePath('User/all'),
     Posts: {
       GET: () => appendBasePath('User/posts'),
       POST: () => appendBasePath('User/posts'),
@@ -70,6 +71,15 @@ export const RouteCategories = {
         PUT: () => appendBasePath('Profile/forgot-password'),
       },
     },
+  },
+  banUser: {
+    GET: () => appendBasePath('BanUser'),
+    GET_AllUsersBandStatus: () => appendBasePath('BanUser/all/status'),
+    GET_history: (userId: string) =>
+      appendBasePath(`BanUser/history/${userId}`),
+    POST: () => appendBasePath('BanUser'),
+    DELETE: (id: string) => appendBasePath(`User/ban-user/${id}`),
+    PUT: (id: string) => appendBasePath(`User/ban-user/${id}`),
   },
 };
 
