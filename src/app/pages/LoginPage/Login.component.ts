@@ -74,6 +74,8 @@ import { RegisterPageComponent } from '../RegisterPage/RegisterPage.component';
                 <mat-error>Password is <strong>required</strong></mat-error>
                 }
               </mat-form-field>
+
+              <app-input/>
             </form>
           </mat-card-content>
 
