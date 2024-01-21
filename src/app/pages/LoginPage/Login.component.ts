@@ -15,6 +15,7 @@ import { UserLoginDto } from '../../Modals/Dtos/UserLoginDto';
 import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/LoginRegisterNav.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RegisterPageComponent } from '../RegisterPage/RegisterPage.component';
+import { InputComponent } from '../../Components/Input/Input.component';
 
 // import
 
@@ -75,7 +76,6 @@ import { RegisterPageComponent } from '../RegisterPage/RegisterPage.component';
                 }
               </mat-form-field>
 
-              <app-input/>
             </form>
           </mat-card-content>
 
@@ -131,6 +131,7 @@ import { RegisterPageComponent } from '../RegisterPage/RegisterPage.component';
     ReactiveFormsModule,
     MatInputModule,
     RouterLink,
+    InputComponent,
     MatProgressBarModule,
     LoginRegisterNavComponent,
   ],

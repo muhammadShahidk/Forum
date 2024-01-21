@@ -1,0 +1,18 @@
+<div *ngIf="User.status === 1">
+  <!-- Toggle Button -->
+  <mat-slide-toggle [checked]="User.status === 1">Enabled</mat-slide-toggle>
+
+  <!-- User Card -->
+  <mat-card>
+    <mat-card-title>{{ userHistory[0]?.firstName }} {{ userHistory[0]?.lastName }}</mat-card-title>
+  </mat-card>
+
+  <!-- History Area -->
+  <div *ngFor="let historyItem of userHistory" class="history-item">
+    <div class="start-date">{{ historyItem.startDate | date }}</div>
+    <div class="progress-bar">
+      <!-- Use Angular Material progress bar component here -->
+    </div>
+    <div class="remaining-days">Remaining Days: {{ calculateRemainingDays(historyItem.endDate) }}</div>
+  </div>
+</div>

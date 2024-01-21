@@ -24,12 +24,17 @@ export interface BannedUserRequestDTO {
   userId:string
   startDate:Date
   endDate:Date
-  status:BannedStatus 
+  status:BannedStatus
 }
 
 
 export enum BannedStatus {
+  Inactive=0,
   Active,
-  Inactive
 }
 
+export interface bandUserStatus {
+  userId: string;
+  userName: string;
+  status: number;
+}

@@ -17,13 +17,13 @@ import { UserService } from '../../Services/User.service';
 export class BandUserComponent implements OnInit {
   // initiliaze  data
   async ngOnInit(): Promise<void> {
-    const data = await this.banUserService.GetAllBannedUsers();
-    this.dataSource.data = data.map((x) => {
-      return {
-        ...x,
-        statusText: BannedStatus[x.status],
-      };
-    });
+    // const data = await this.banUserService.GetAllBannedUsers();
+    // this.dataSource.data = data.map((x) => {
+    //   return {
+    //     ...x,
+    //     statusText: BannedStatus[x.status],
+    //   };
+    // });
     console.group('banuser Facthing data');
     console.count('count of requests');
     console.log(this.dataSource.data);

@@ -32,7 +32,7 @@ export class BandUsersListDataSource extends DataSource<BannedUserResponceDTO> {
   }
 
   private async loadData(): Promise<void> {
-    this.data = await this.banduserService.GetAllBannedUsers();
+    // this.data = await this.banduserService.GetAllBannedUsers();
     console.log(this.data);
   }
 

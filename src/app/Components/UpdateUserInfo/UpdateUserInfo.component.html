@@ -13,7 +13,7 @@
       <input matInput placeholder="Last Name" formControlName="lastName" required />
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="updateUserInfo()">
+    <button type="button" mat-raised-button color="primary" (click)="updateUserInfo()">
       <span class="flex items-center gap-2">
         @if (isSpinner()) {
         <mat-spinner [diameter]="20" color="accent"></mat-spinner>
@@ -22,14 +22,14 @@
     </button>
   </form>
 
- 
+
   @if (isComplete()) {
   <app-alert-box heading="Update User Info" message="User Info Updated"></app-alert-box>
   }
 </div>
 
 
-<p>
+<!-- <p>
   <mat-form-field appearance="fill">
     <mat-label>Fill form field</mat-label>
     <input matInput placeholder="Placeholder">
@@ -44,4 +44,4 @@
     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
-</p>
+</p> -->
