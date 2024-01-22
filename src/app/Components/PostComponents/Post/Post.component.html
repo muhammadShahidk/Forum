@@ -33,22 +33,26 @@
 
       <div class="flex items-center gap-3">
         <!-- Icon views-->
-        <div class="flex items-center gap-2">
+        <!-- <div class="flex items-center gap-2">
           <mat-icon [classList]="IconStyles">visibility</mat-icon>
           <span>10</span>
-        </div>
+        </div> -->
 
         <!-- Icon comments -->
-        <div class="flex items-center gap-2">
+        <!-- <div class="flex items-center gap-2">
           <mat-icon [classList]="IconStyles">comment</mat-icon>
           <span>10</span>
-        </div>
+        </div> -->
 
         <!-- Icon -->
-        <div class="flex items-center gap-2">
+        <!-- <div class="flex items-center gap-2">
           <mat-icon [classList]="IconStyles">arrow_upward</mat-icon>
           <span>10</span>
-        </div>
+        </div> -->
+        @if (isModerator) {
+
+        <button color="accent" (click)="DeletePost()" mat-stroked-button>Delete</button>
+        }
       </div>
     </div>
   </mat-card-actions>

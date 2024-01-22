@@ -1,5 +1,5 @@
 import { CommonModule, JsonPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -22,6 +22,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { BanUserDialogComponent } from '../../Components/Dialog/BanUserDialog/BanUserDialog.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-ban-user-page',
@@ -34,15 +36,17 @@ import { BanUserDialogComponent } from '../../Components/Dialog/BanUserDialog/Ba
     MatChipsModule,
     MatInputModule,
     MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ],
   templateUrl: './banUserPage.component.html',
   styleUrl: './banUserPage.component.css',
 })
-export class BanUserPageComponent implements OnInit {
+export class BanUserPageComponent implements OnInit, AfterViewInit {
   Change(user: bandUserStatus) {
     const dialogRef = this.dialog.open(BanUserDialogComponent, {
       data: {
-        User:user,
+        User: user,
       },
     });
 
@@ -51,6 +55,13 @@ export class BanUserPageComponent implements OnInit {
     });
   }
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   bannedUsers: bandUserStatus[] = []; // Replace 'any' with the actual type of your banned users data
   displayedColumns: string[] = ['userName', 'status', 'action'];

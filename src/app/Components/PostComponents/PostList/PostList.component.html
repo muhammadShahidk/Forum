@@ -7,7 +7,7 @@
     </button>
     <div class="mt-6">
      @for (item of posts$ |async; track $index) {
-        <app-post  [post]="item"></app-post>
+        <app-post [isModerator]="isModerator"  [post]="item"></app-post>
      }
    </div>
  </div>

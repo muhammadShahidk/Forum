@@ -24,7 +24,6 @@ export interface BannedUserRequestDTO {
   userId:string
   startDate:Date
   endDate:Date
-  status:BannedStatus
 }
 
 

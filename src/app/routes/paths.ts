@@ -74,12 +74,12 @@ export const RouteCategories = {
   },
   banUser: {
     GET: () => appendBasePath('BanUser'),
-    GET_AllUsersBandStatus: () => appendBasePath('BanUser/all/status'),
+    GET_AllUsersBandStatus: ()   => appendBasePath('BanUser/all/status'),
     GET_history: (userId: string) =>
       appendBasePath(`BanUser/history/${userId}`),
     POST: () => appendBasePath('BanUser'),
     DELETE: (id: string) => appendBasePath(`User/ban-user/${id}`),
-    PUT: (id: string) => appendBasePath(`User/ban-user/${id}`),
+    PUT: () => appendBasePath(`BanUser`),
   },
 };
 

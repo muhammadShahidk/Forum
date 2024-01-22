@@ -21,6 +21,8 @@ import {
 } from '@angular/router';
 import { PostHeaderComponent } from '../PostHeader/PostHeader.component';
 import { PostRequestDto, PostResponseDto } from '../../../Modals/Dtos/PostDto';
+import { AuthService } from '../../../Services/Auth.service';
+import { PostService } from '../../../Services/PostService';
 @Component({
   selector: 'app-post',
   standalone: true,
@@ -36,7 +38,21 @@ import { PostRequestDto, PostResponseDto } from '../../../Modals/Dtos/PostDto';
   styleUrl: './Post.component.css',
 })
 export class PostComponent implements OnChanges {
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  async DeletePost() {
+    const postID = this.post?.postID ?? 0;
+    try {
+      await this.postService.deletePost(postID);
+      this.postService.OnPostDelete.emit(postID);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private postService: PostService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['post']) {
@@ -50,6 +66,8 @@ export class PostComponent implements OnChanges {
   // ...
   @Input()
   post?: PostResponseDto;
+  @Input()
+  isModerator = false;
 
   ViewDetails() {
     console.log('activated route' + this.route);
@@ -58,9 +76,8 @@ export class PostComponent implements OnChanges {
     });
   }
 
-
-  @Input() isComment:boolean = false;
-  @Input() isPostView:boolean = false;
+  @Input() isComment: boolean = false;
+  @Input() isPostView: boolean = false;
   date? = signal<Date>(new Date());
 
   title: string = 'What do you think about manshera';

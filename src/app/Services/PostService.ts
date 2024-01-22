@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, firstValueFrom } from 'rxjs';
 import { RouteCategories } from '../routes/paths';
@@ -15,19 +15,23 @@ import { apiResponce } from '../Modals/Dtos/ApiResponceDto';
 })
 export class PostService {
   async getUserPosts(): Promise<PostResponseDto[]> {
-     const responses = await this.api.handleRequest(
-       this.http.get<apiResponce<PostResponseDto[]>>(RouteCategories.User.Posts.GET())
-     );
-     return responses.Data.sort((a, b) => {
-       return Number(new Date(b.dateCreated)) - Number(new Date(a.dateCreated));
-     });
+    const responses = await this.api.handleRequest(
+      this.http.get<apiResponce<PostResponseDto[]>>(
+        RouteCategories.User.Posts.GET()
+      )
+    );
+    return responses.Data.sort((a, b) => {
+      return Number(new Date(b.dateCreated)) - Number(new Date(a.dateCreated));
+    });
   }
 
   constructor(private http: HttpClient, private api: ApiRequestService) {}
 
   async getPosts(): Promise<PostResponseDto[]> {
     const responses = await this.api.handleRequest(
-      this.http.get<apiResponce<PostResponseDto[]>>(RouteCategories.Posts.GET_All())
+      this.http.get<apiResponce<PostResponseDto[]>>(
+        RouteCategories.Posts.GET_All()
+      )
     );
     return responses.Data.sort((a, b) => {
       return Number(new Date(b.dateCreated)) - Number(new Date(a.dateCreated));
@@ -36,7 +40,9 @@ export class PostService {
 
   async getPost(postId: number): Promise<PostResponseDto> {
     const url = RouteCategories.Posts.GET(postId);
-    const responce =  await this.api.handleRequest(this.http.get<apiResponce<PostResponseDto>>(url));
+    const responce = await this.api.handleRequest(
+      this.http.get<apiResponce<PostResponseDto>>(url)
+    );
     return responce.Data;
   }
 
@@ -76,6 +82,8 @@ export class PostService {
     const url = RouteCategories.User.Posts.Comments.POST(postId);
     return await this.api.handleRequest(this.http.post(url, comment));
   }
+
+  public OnPostDelete: EventEmitter<any> = new EventEmitter();
 
   //sort array
 }
