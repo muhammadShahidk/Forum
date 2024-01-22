@@ -9,12 +9,9 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes,withComponentInputBinding()),
+    provideRouter(routes, withComponentInputBinding()),
     provideAnimations(),
-    provideHttpClient(
-      withInterceptors([authInterceptor])
-    ),
-    // {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
-
-  ],
+    provideHttpClient(withInterceptors([authInterceptor])),
+    provideAnimations()
+],
 };

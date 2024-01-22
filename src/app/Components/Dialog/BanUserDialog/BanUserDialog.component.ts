@@ -4,7 +4,6 @@ import {
   Inject,
   OnInit,
   inject,
-  ɵZoneAwareQueueingScheduler,
 } from '@angular/core';
 import {
   BannedUserRequestDTO,
@@ -45,13 +44,11 @@ const year = today.getFullYear();
     CommonModule,
     MatCardModule,
     HistoryItemComponent,
-
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
     MatListModule,
-
     MatSelectModule,
     MatButtonModule,
     MatDatepickerModule,
