@@ -1,14 +1,19 @@
 <div class="p-5">
-    <!-- user Profile with name-->
-    <div class="flex items-center gap-3 p-2justify-center">
-      <div
-        class="text-4xl w-[50px] h-[50px] flex justify-center items-center rounded-full b bg-gray-400"
-      >
-        {{ user.charAt(0) }}
-      </div>
-      <div class="text-lg">{{ user.toUpperCase() }}</div>
+  <!-- user Profile with name-->
+  <div class="flex items-center gap-3 p-2justify-center">
+    <!-- profile char -->
+    <div
+      class="text-lg w-[50px] border h-[50px] flex justify-center items-center rounded-full p-2"
+    >
+      {{ user.charAt(0) }}
     </div>
-    <!-- Post title -->
-    <div class="text-2xl ml-3 mt-3">{{ title }}</div>
+
+    <div class="flex flex-col gap-1">
+      <div class="text-base">{{ user.toUpperCase() }}</div>
+      <div class="text-sm text-gray-500">{{ CreatedOn() }}</div>
+    </div>
   </div>
-  
+@if (!isComment) {
+  <div class="text-lg mt-4">{{ title }}</div>
+}
+</div>

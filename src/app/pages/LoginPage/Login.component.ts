@@ -6,7 +6,6 @@ import {
   signal,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { RegisterComponent } from '../registerPage/register.component';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -14,6 +13,9 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/Auth.service';
 import { UserLoginDto } from '../../Modals/Dtos/UserLoginDto';
 import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/LoginRegisterNav.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RegisterPageComponent } from '../RegisterPage/RegisterPage.component';
+import { InputComponent } from '../../Components/Input/Input.component';
 
 // import
 
@@ -21,8 +23,8 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
   selector: 'app-login',
   standalone: true,
   template: `
-  <!-- nav -->
-  <app-login-register-nav/>
+    <!-- nav -->
+    <app-login-register-nav />
     <!-- login page container -->
     <div class="m-auto mt-5 sm:p-5 md:w-4/6  bg-gray-100  ">
       <!-- header title -->
@@ -73,6 +75,7 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
                 <mat-error>Password is <strong>required</strong></mat-error>
                 }
               </mat-form-field>
+
             </form>
           </mat-card-content>
 
@@ -84,10 +87,23 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
               (click)="onSubmit()"
               type="submit"
               class="w-full"
+              [disabled]="!loginForm.valid"
             >
               login
             </button>
+            <!-- show the loding progress barr wheile loging  -->
+
+            <!-- forgot password button -->
+            <a mat-button routerLink="/forgot-password" class="w-full">
+              forgot password?
+            </a>
           </mat-card-actions>
+          @if (isInprogress()) {
+          <mat-progress-bar
+            mode="indeterminate"
+            class="w-full"
+          ></mat-progress-bar
+          >}
         </mat-card>
 
         <!-- login Image -->
@@ -110,30 +126,30 @@ import { LoginRegisterNavComponent } from '../../Components/LoginRegisterNav/Log
   imports: [
     CommonModule,
     MatButtonModule,
-    RegisterComponent,
+    RegisterPageComponent,
     MatCardModule,
     ReactiveFormsModule,
     MatInputModule,
     RouterLink,
-    LoginRegisterNavComponent
+    InputComponent,
+    MatProgressBarModule,
+    LoginRegisterNavComponent,
   ],
 })
-
 export class LoginComponent {
   private fb = inject(FormBuilder);
   loginForm = this.fb.group({
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
     username: [null, Validators.required],
     password: [null, Validators.required],
-    email: [null, Validators.required],
   });
 
   ErrorMessage = signal(''); //) ;
+  isInprogress = signal(false);
 
   constructor(private router: Router, private authService: AuthService) {}
 
   async login() {
+    this.isInprogress.set(true);
     try {
       const userLoginDto: UserLoginDto = {
         username: this.loginForm.value.username || '',
@@ -141,7 +157,9 @@ export class LoginComponent {
       };
 
       const user = await this.authService.Login(userLoginDto);
+
       // Do something with the user object
+      this.isInprogress.set(false);
       console.log('login response');
       console.log(user);
       this.router.navigate(['/forum']);
@@ -149,6 +167,7 @@ export class LoginComponent {
       // Handle the error
       this.ErrorMessage.set(error as any);
       console.error('login error');
+      this.isInprogress.set(false);
       console.log('error message' + this.ErrorMessage());
     }
   }
