@@ -74,13 +74,17 @@ export class BanUserDialogComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
   async BanUser() {
+    console.log('selected date range ');
+    console.log(this.range.value);
+
     const banRequest: BannedUserRequestDTO = {
       userId: this.User.userId,
       startDate: this.range.value.start ?? new Date(),
       endDate: this.range.value.end ?? new Date(),
     };
 
-    banRequest.endDate.setDate(banRequest.startDate.getDate() + 5);
+    console.log('baning user request');
+    console.log(banRequest);
 
     try {
       const result = await this.bannedUsersService.BanUser(banRequest);
