@@ -32,7 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { HistoryItemComponent } from '../../HistoryItem/HistoryItem.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-// import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
 const today = new Date();
 const month = today.getMonth();
 const year = today.getFullYear();
@@ -40,6 +40,7 @@ const year = today.getFullYear();
 @Component({
   selector: 'app-ban-user-dialog',
   standalone: true,
+  providers: [provideNativeDateAdapter()],
   imports: [
     CommonModule,
     MatCardModule,
