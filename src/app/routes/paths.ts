@@ -1,14 +1,11 @@
-
 // export const _basePath = 'https://localhost:44376/api';
-export const _basePath = 'https://localhost:44344/api';
+export const _basePath = 'https://localhost:7001/api';
 
 export const Auth = {
   login: 'Auth/login',
   register: 'Auth/register',
   allUsersWithRools: 'Auth/get-user-rols',
 };
-
-
 
 const appendBasePath = (route: string) => {
   return `${_basePath}/${route}`;
@@ -33,6 +30,14 @@ export const RouteCategories = {
           appendBasePath(`Posts/${postId}/comments/${commentId}`),
         PUT: (id: string) => appendBasePath(`User/comments/${id}`),
       },
+    },
+    Replies: {
+      GET: (commentId: number) => appendBasePath(`Replies/comment/${commentId}`),
+      GETAll: () => appendBasePath('Replies'),
+      POST: (commentId: number) => appendBasePath(`Replies/comment/${commentId}`),
+      DELETE: (replyId: number) =>
+        appendBasePath(`Replies/${replyId}`),
+      PUT: (id: number) => appendBasePath(`Replies/${id}`),
     },
   },
   Posts: {
@@ -74,7 +79,7 @@ export const RouteCategories = {
   },
   banUser: {
     GET: () => appendBasePath('BanUser'),
-    GET_AllUsersBandStatus: ()   => appendBasePath('BanUser/all/status'),
+    GET_AllUsersBandStatus: () => appendBasePath('BanUser/all/status'),
     GET_history: (userId: string) =>
       appendBasePath(`BanUser/history/${userId}`),
     POST: () => appendBasePath('BanUser'),
@@ -82,9 +87,6 @@ export const RouteCategories = {
     PUT: () => appendBasePath(`BanUser`),
   },
 };
-
-
-
 
 // export const RouteCategories = {
 //   User: {
@@ -128,8 +130,6 @@ export const RouteCategories = {
 //     GET_ALL: 'User/approval-request',
 //   },
 // };
-
-
 
 // // Example of usage:
 // const postEditRoute = RouteCategories.Posts.PUT('123'); // '/api/User/posts/123'

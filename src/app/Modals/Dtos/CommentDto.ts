@@ -17,7 +17,7 @@ export interface CommentResponceDto {
  
 
        constructor(commentResponseDto:CommentResponceDto){
-            this.postID = 0;
+            this.postID = commentResponseDto.commentId;
             this.UserID = commentResponseDto.userID;
             this.dateCreated = new Date(commentResponseDto.dateCreateAt);
             this.title = commentResponseDto.content;

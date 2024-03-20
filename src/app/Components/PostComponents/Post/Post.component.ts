@@ -23,6 +23,12 @@ import { PostHeaderComponent } from '../PostHeader/PostHeader.component';
 import { PostRequestDto, PostResponseDto } from '../../../Modals/Dtos/PostDto';
 import { AuthService } from '../../../Services/Auth.service';
 import { PostService } from '../../../Services/PostService';
+import { RepliesService } from '../../../Services/RepliesService';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { ReplyResponseDto } from '../../../Modals/Dtos/ReplyResponseDto';
+import { ReplyComponent } from '../Reply/Reply.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 @Component({
   selector: 'app-post',
   standalone: true,
@@ -32,26 +38,47 @@ import { PostService } from '../../../Services/PostService';
     MatCardModule,
     MatIconModule,
     MatChipsModule,
+    MatInputModule,
+    ReplyComponent,
+    MatExpansionModule,
+    FormsModule,
+
     PostHeaderComponent,
   ],
   templateUrl: './Post.component.html',
   styleUrl: './Post.component.css',
 })
 export class PostComponent implements OnChanges {
+  panelOpenState = false;
+  Replies: ReplyResponseDto[] = [];
+  async AddReply() {
+    console.log('adding reply', this.ReplyValue);
+    await this.replyService.addReply(this.post?.postID ?? 1, {
+      content: this.ReplyValue,
+    });
+    await this.getCommentsReplies();
+    this.ReplyValue = '';
+    console.log(this.post);
+  }
+  ReplyValue: string = '';
+  Reply() {
+    this.ShowReplyBox?.set(true);
+    // this.replyService.addReply(this.post?.postID??1,{content:"smaple"})
+  }
   async DeletePost() {
     const postID = this.post?.postID ?? 0;
     try {
       await this.postService.deletePost(postID);
       this.postService.OnPostDelete.emit(postID);
-    }
-    catch (e) {
+    } catch (e) {
       console.log(e);
     }
   }
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private postService: PostService
+    private postService: PostService,
+    private replyService: RepliesService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -60,9 +87,20 @@ export class PostComponent implements OnChanges {
       if (this.post?.dateCreated !== undefined) {
         this.date?.set(this.post?.dateCreated);
       }
+
+      if (this.isComment) {
+        this.getCommentsReplies();
+      }
     }
   }
 
+  async getCommentsReplies() {
+    let Replies = await this.replyService.getCommentsReply(
+      this.post?.postID ?? 0
+    );
+    this.Replies = Replies
+    // Replies.forEach(item=>this.Replies.push(item))
+  }
   // ...
   @Input()
   post?: PostResponseDto;
@@ -79,6 +117,7 @@ export class PostComponent implements OnChanges {
   @Input() isComment: boolean = false;
   @Input() isPostView: boolean = false;
   date? = signal<Date>(new Date());
+  ShowReplyBox = signal<boolean>(false);
 
   title: string = 'What do you think about manshera';
   user: string = 'shahid';

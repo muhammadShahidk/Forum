@@ -23,6 +23,7 @@
       }
     </p>
   </mat-card-content>
+
   @if (!isComment) {
   <mat-card-actions>
     <div class="flex items-center justify-between w-11/12 mt-3">
@@ -51,11 +52,58 @@
         </div> -->
         @if (isModerator) {
 
-        <button color="accent" (click)="DeletePost()" mat-stroked-button>Delete</button>
+        <button color="accent" (click)="DeletePost()" mat-stroked-button>
+          Delete
+        </button>
         }
       </div>
     </div>
   </mat-card-actions>
 
+  } @if(isComment){
+  <mat-card-actions>
+    <div class="flex items-center justify-between w-11/12 mt-3">
+      <button (click)="Reply()" mat-stroked-button>Reply</button>
+    </div>
+  </mat-card-actions>
+  
+
+
+} @if (ShowReplyBox()) {
+  <div class="w-4/6 self-end flex gap-2">
+    <mat-form-field class="w-full">
+      <mat-label>Leave Comment</mat-label>
+      <input matInput type="text" [(ngModel)]="ReplyValue" />
+      @if (ReplyValue) {
+      <button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="ReplyValue = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+    <button (click)="AddReply()" mat-stroked-button>Add</button>
+  </div>
+
   }
+  @if(isComment){
+  <mat-expansion-panel
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title> See All Replies </mat-panel-title>
+      <!-- <mat-panel-description>
+        
+      </mat-panel-description> -->
+    </mat-expansion-panel-header>
+    @if (Replies.length >0 ) { @for (item of Replies; track $index) {
+    <app-reply [Reply]="item"></app-reply>
+    } }
+  </mat-expansion-panel>
+
+}
 </mat-card>
