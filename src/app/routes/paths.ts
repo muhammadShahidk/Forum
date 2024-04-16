@@ -1,5 +1,5 @@
 // export const _basePath = 'https://localhost:44376/api';
-export const _basePath = 'https://onlinediscusstionforumdevweb001.azurewebsites.net';
+export const _basePath = 'https://onlinediscusstionforumdevweb001.azurewebsites.net/api';
 
 export const Auth = {
   login: 'Auth/login',
